@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Slider = ({id, color}) => {
+const Slider = ({ color }) => {
+  const [id, setId] = useState();
+
+  useEffect(() => {
+    setId(Math.random());
+  }, []);
   const update = () => {
     const val = document.getElementById(`sliderInput${id}`).value;
     document.getElementById(`sliderProgress${id}`).style.width = val + "%";
   };
   return (
     <div
-        className="
+      className="
         grid grid-cols-1 grid-rows-1
         justify-center items-center
         w-full
         "
-      >
-        <input
-          id={`sliderInput${id}`}
-          className={`
+    >
+      <input
+        id={`sliderInput${id}`}
+        className={`
           row-start-1 col-start-1
           z-30 thumb-${color}
           `}
-          onChange={update}
-          type="range"
-        />
-        <div
-          id={`sliderProgress${id}`}
-          className={`
+        onChange={update}
+        type="range"
+      />
+      <div
+        id={`sliderProgress${id}`}
+        className={`
           row-start-1 col-start-1
           z-20
           h-[3px]
@@ -32,10 +37,10 @@ const Slider = ({id, color}) => {
           bg-${color}
           rounded-full
           `}
-        ></div>
-        <div
-          id={`sliderPreload${id}`}
-          className="
+      ></div>
+      <div
+        id={`sliderPreload${id}`}
+        className="
           row-start-1 col-start-1
           z-10
           h-[1px]
@@ -43,17 +48,17 @@ const Slider = ({id, color}) => {
           bg-[#898989]
           rounded-full
           "
-        ></div>
-        <div
-          className="
+      ></div>
+      <div
+        className="
           row-start-1 col-start-1
           z-0
           w-full h-[1px]
           bg-[#C6C6C6]
           rounded-full
           "
-        ></div>
-      </div>
+      ></div>
+    </div>
   );
 };
 

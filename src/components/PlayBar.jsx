@@ -2,9 +2,13 @@ import React from "react";
 import stopIcon from "../assets/stop.svg";
 import pauseIcon from "../assets/pause.svg";
 import volumeIcon from "../assets/volume.svg";
-import Slider from "./Slider"
+import { Slider } from "@mui/material";
 
-
+const colorConvert = {
+  blue: "#118AD3",
+  green: "#00BA9F",
+  red: "#FF1654",
+};
 const PlayBar = ({ color }) => {
   return (
     <div
@@ -26,7 +30,25 @@ const PlayBar = ({ color }) => {
         </button>
       </div>
       <div className="flex justify-center items-center">
-        <Slider />
+        <Slider
+          sx={{
+            color: colorConvert[color],
+            height: "3px",
+            "& .MuiSlider-rail ": {
+              color : "#C6C6C6;",
+              height: "1px"
+            },
+            "& .MuiSlider-thumb ": {
+              height:"14px",
+              width:"14px",
+              boxShadow:"none",
+              dropShadow:"none"
+            },
+          }}
+          size=""
+          max={100}
+          min={0}
+        />
       </div>
       <div>
         <p
@@ -46,7 +68,25 @@ const PlayBar = ({ color }) => {
           <img src={volumeIcon} alt="" />
         </button>
         <div className="w-[70%] flex justify-center items-center">
-          <Slider />
+          <Slider
+            sx={{
+              color: colorConvert[color],
+              height: "2px",
+              "& .MuiSlider-thumb ": {
+                display: "none",
+                
+              },
+              "& .MuiSlider-rail ": {
+                color : "#C6C6C6;",
+                height: "2px"
+              },
+              
+            }}
+            
+            size="small"
+            max={100}
+            min={0}
+          />
         </div>
       </div>
     </div>

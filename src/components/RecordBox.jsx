@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import centerMicBtn from "../assets/centerMicBtn.svg";
 import { StopIcon, MicIcon } from "../assets/Icons";
+
 
 const RecordBox = () => {
   const [recording, setRecording] = useState(false);
@@ -12,7 +12,7 @@ const RecordBox = () => {
       "
     >
       <button
-        className={`bg-green mb-2 rounded-full relative h-16 w-16 ${recording?"animate-pulse":""}`}
+        className={`bg-green mb-2 rounded-full relative h-16 w-16 ${recording?"animate-bounce":""}`}
         onClick={() => {
           setRecording(!recording);
         }}

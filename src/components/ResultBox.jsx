@@ -103,7 +103,7 @@ const ResultBox = ({ restart, color, archive }) => {
           </button>
         </div>
       </div>
-      <div className="py-8 [direction:rtl] font-light max-h-[30vh] overflow-scroll">
+      <div className="py-8 [direction:rtl] font-light h-[30vh] overflow-scroll">
         {displayType == "simple" ? <SimpleDisplay /> : <TimedDisplay />}
       </div>
       <div className="flex justify-center items-center ">
