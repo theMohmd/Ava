@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: "iranYekan";
+  src: url("assets/iranYekan.ttf");
+}
+@font-face {
+  font-family: "iranSans";
+  src: url("assets/iranSans.ttf");
+}
+.side-gradient {
+  background: linear-gradient(144deg, #00b5a0 20%, #00c69b 100%), url('./assets/Alefba.svg');
+}
+.rtl {
+  direction: "rtl"
+}
+.MuiSlider-thumb:is(:hover, .Mui-active),.volume {
+  display: none;
+}
+.MuiSlider-thumb {
+  background-color: orange;
+  box-shadow: none;
+  width: 0px;
+  height: 0px;
+}
