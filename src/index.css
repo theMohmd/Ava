@@ -15,12 +15,3 @@
 .rtl {
   direction: "rtl"
 }
-.MuiSlider-thumb:is(:hover, .Mui-active),.volume {
-  display: none;
-}
-.MuiSlider-thumb {
-  background-color: orange;
-  box-shadow: none;
-  width: 0px;
-  height: 0px;
-}

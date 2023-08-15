@@ -17,8 +17,8 @@ const App = () => {
       <DropDown className="absolute top-12 left-12" />
 
       <Routes>
-        <Route path="/" element={<SpeechToText />} />
-        <Route path="/archive" element={<Archive />} />
+        <Route path="/Ava/" element={<SpeechToText />} />
+        <Route path="/Ava/archive" element={<Archive />} />
       </Routes>
 
       <SideBar />

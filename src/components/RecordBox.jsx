@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import centerMicBtn from "../assets/centerMicBtn.svg";
+import { StopIcon, MicIcon } from "../assets/Icons";
+
 const RecordBox = () => {
+  const [recording, setRecording] = useState(false);
   return (
     <div
       className="
@@ -8,8 +11,13 @@ const RecordBox = () => {
       flex flex-col justify-center items-center
       "
     >
-      <button className="mb-2">
-        <img src={centerMicBtn} alt="mic btn" className="" />
+      <button
+        className={`bg-green mb-2 rounded-full relative h-16 w-16 ${recording?"animate-pulse":""}`}
+        onClick={() => {
+          setRecording(!recording);
+        }}
+      >
+        {recording ? <StopIcon className={"m-3"}/> : <MicIcon />}
       </button>
       <div className="overflow-scroll max-h-[20vh] py-4">
         <p className="[direction:rtl] max-w-[80ch] text-center text-[#626262] font-light">

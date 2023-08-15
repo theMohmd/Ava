@@ -27,8 +27,8 @@ const SideBar = () => {
           <img src={logo} alt="React Logo" className="h-full w-auto" />
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
-          <SideBarButton to="/" text="تبدیل گفتار" src={speechIcon} />
-          <SideBarButton to="/archive" text="آرشیو" src={archiveIcon}/>
+          <SideBarButton to="/Ava/" text="تبدیل گفتار" src={speechIcon} />
+          <SideBarButton to="/Ava/archive" text="آرشیو" src={archiveIcon}/>
         </div>
       </div>
     </div>
