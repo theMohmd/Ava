@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import timeBtn from "../assets/time.svg";
-import textBtn from "../assets/text.svg";
-import refreshBtn from "../assets/refresh.svg";
-import copyBtn from "../assets/copy.svg";
-import downloadBtn from "../assets/download.svg";
 import PlayBar from "./PlayBar";
 import SimpleDisplay from "./SimpleDisplay";
 import TimedDisplay from "./TimedDisplay";
+import {
+  CopyIcon,
+  DownloadIcon,
+  RefreshIcon,
+  TextIcon,
+  TimeIcon,
+} from "../assets/Icons";
 
 const ResultBox = ({ restart, color, archive }) => {
   const [displayType, setDisplayType] = useState("simple");
@@ -15,7 +17,6 @@ const ResultBox = ({ restart, color, archive }) => {
       className="
         h-full w-full
         grid grid-cols-1 grid-rows-[68fr_285fr_76fr] px-7
-        
         "
     >
       <div
@@ -39,17 +40,17 @@ const ResultBox = ({ restart, color, archive }) => {
             className={`
             flex justify-center items-center gap-2 px-3 py-2
             bg-${color} rounded-[20px]
-            ${archive?"hidden":""}
+            ${archive ? "hidden" : ""}
             `}
           >
             <p className="text-white text-sm">شروع دوباره</p>
-            <img src={refreshBtn} alt="refresh btn" />
+            <RefreshIcon />
           </button>
-          <button className={archive?"hidden":""}>
-            <img src={copyBtn} alt="copy btn" />
+          <button className={archive ? "hidden" : ""}>
+            <CopyIcon />
           </button>
-          <button className={archive?"hidden":""}>
-            <img src={downloadBtn} alt="download btn" />
+          <button className={archive ? "hidden" : ""}>
+            <DownloadIcon />
           </button>
         </div>
         <div
@@ -69,17 +70,14 @@ const ResultBox = ({ restart, color, archive }) => {
           >
             <p
               className={`
-                
+                text-sm
+                ${displayType !== "timed" ? "opacity-60" : null}
                 `}
             >
               متن زمان‌بندی شده
             </p>
-            <img
-              src={timeBtn}
-              alt="time icon"
-              className={`${
-                displayType == "timed" ? "" : "[filter:opacity(60%)]"
-              }`}
+            <TimeIcon
+              className={displayType !== "timed" ? "opacity-60" : null}
             />
           </button>
           <button
@@ -93,13 +91,16 @@ const ResultBox = ({ restart, color, archive }) => {
               ${displayType == "simple" ? "border-b" : "font-light "}
               `}
           >
-            <p>متن ساده</p>
-            <img
-              src={textBtn}
-              alt="text icon"
-              className={`${
-                displayType == "simple" ? "" : "[filter:opacity(60%)]"
-              }`}
+            <p
+              className={`
+                text-sm
+                ${displayType !== "simple" ? "opacity-60" : null}
+                `}
+            >
+              متن ساده
+            </p>
+            <TextIcon
+              className={displayType !== "simple" ? "opacity-60" : null}
             />
           </button>
         </div>
@@ -108,7 +109,7 @@ const ResultBox = ({ restart, color, archive }) => {
         {displayType == "simple" ? <SimpleDisplay /> : <TimedDisplay />}
       </div>
       <div className="flex justify-center items-center ">
-        <PlayBar color={color}/>
+        <PlayBar color={color} />
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import userIcon from "../assets/user.svg";
-import dropIcon from "../assets/drop.svg";
-import logoutIcon from "../assets/logout.svg";
+import { DropIcon, LogoutIcon, UserIcon } from "../assets/Icons";
 
 const DropDown = ({ className }) => {
   const [open, setOpen] = useState(false);
@@ -24,9 +22,9 @@ const DropDown = ({ className }) => {
         flex justify-center items-center gap-2
         "
       >
-        <img src={dropIcon} alt="drop icon" className={open ? "rotate-180" : ""} />
+        <DropIcon className={open ? "rotate-180" : null}/>
         <p className="relative bottom-[2px]">مهمان</p>
-        <img src={userIcon} alt="user icon" />
+        <UserIcon />
       </button>
       <div className={`${open ? " delay-100" : "[visibility:hidden] "}  `}>
         <button
@@ -40,7 +38,7 @@ const DropDown = ({ className }) => {
         "
         >
           <p className="relative bottom-[2px]">خروج</p>
-          <img src={logoutIcon} alt="logout icon" />
+          <LogoutIcon />
         </button>
       </div>
     </div>

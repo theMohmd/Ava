@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SideBarButton = ({className, src, text, to}) => {
   return (
@@ -18,7 +18,7 @@ const SideBarButton = ({className, src, text, to}) => {
       `}
     >
       {text}
-      <img src={src} alt="" className="group-[.active]:bg-red"/>
+      {src}
     </NavLink>
   );
 };

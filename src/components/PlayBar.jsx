@@ -1,8 +1,7 @@
 import React from "react";
-import stopIcon from "../assets/stop.svg";
-import pauseIcon from "../assets/pause.svg";
-import volumeIcon from "../assets/volume.svg";
 import { Slider } from "@mui/material";
+import { PauseIcon, StopIcon, VolumeIcon } from "../assets/Icons";
+
 
 const colorConvert = {
   blue: "#118AD3",
@@ -13,7 +12,7 @@ const PlayBar = ({ color }) => {
   return (
     <div
       className="
-      w-full h-auto items-center justify-center
+      w-[520px] h-auto items-center justify-center
       rounded-[10px]
       p-3
       bg-[#F8F8F8]
@@ -22,11 +21,11 @@ const PlayBar = ({ color }) => {
       "
     >
       <div className="flex justify-around">
-        <button>
-          <img src={stopIcon} alt="" />
+        <button className="h-5 w-5">
+          <StopIcon className="h-full w-full" fill="#3D3D3D" stroke="none"/>
         </button>
         <button>
-          <img src={pauseIcon} alt="" />
+          <PauseIcon />
         </button>
       </div>
       <div className="flex justify-center items-center">
@@ -65,7 +64,7 @@ const PlayBar = ({ color }) => {
         "
       >
         <button>
-          <img src={volumeIcon} alt="" />
+          <VolumeIcon/>
         </button>
         <div className="w-[70%] flex justify-center items-center">
           <Slider

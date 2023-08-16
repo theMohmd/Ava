@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import dropIcon from "../assets/drop.svg";
-
+import { DropIcon } from "../assets/Icons";
 const LangSelect = ({ className }) => {
   const [lang, setLang] = useState("fa");
   const [open, setOpen] = useState(false);
@@ -28,7 +27,7 @@ const LangSelect = ({ className }) => {
             flex justify-center items-center gap-2
             "
         >
-          <img src={dropIcon} alt="drop icon" className={open ? "rotate-180" : ""}/>
+          <DropIcon className={open ? "rotate-180" : ""}/>
           <p className="relative bottom-[2px]">
             {lang == "fa" ? "فارسی" : "انگلیسی"}
           </p>

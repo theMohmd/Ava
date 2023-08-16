@@ -1,6 +1,6 @@
 import React from "react";
 
-const ConvertBoxButton = ({className, src, text, onClick, active, color}) => {
+const ConvertBoxButton = ({className, Icon, text, onClick, active, color}) => {
   return (
     <button
       onClick={onClick}
@@ -13,7 +13,8 @@ const ConvertBoxButton = ({className, src, text, onClick, active, color}) => {
           
     >
       <p>{text}</p>
-      <img src={src} alt="icon" className={!active?"[filter:brightness(40%)]":""}/>
+      <Icon fill={!active?"#969696":"white"}/>
+      {/* <img src={src} alt="icon" className={!active?"[filter:brightness(40%)]":""}/> */}
     </button>
   );
 };

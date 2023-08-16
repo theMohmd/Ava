@@ -1,7 +1,7 @@
 import React from "react";
 import ArchiveFile from "./ArchiveFile";
-import leftIcon from "../assets/left.svg";
-import rightIcon from "../assets/right.svg";
+import { LeftIcon, RightIcon } from "../assets/Icons";
+
 const Archive = () => {
   return (
     <div
@@ -19,6 +19,7 @@ const Archive = () => {
       >
         <div
           className="
+          pr-2 pl-4
           grid grid-cols-[160fr_80fr_150fr_95fr_390fr_100fr_65fr] grid-rows-1
           justify-center items-center text-center
           "
@@ -29,18 +30,18 @@ const Archive = () => {
           <p className="text-sm [direction:rtl] col-start-6 ">نام فایل</p>
         </div>
         <div className="pl-2 gap-2 flex flex-col overflow-scroll max-h-[60vh] [direction:rtl] [&>*]:[direction:ltr]">
-          <ArchiveFile type="mic" />
+          <ArchiveFile type="record" />
           <ArchiveFile type="link" />
           <ArchiveFile type="upload" />
-          <ArchiveFile type="mic" />
-          <ArchiveFile type="mic" />
+          <ArchiveFile type="record" />
+          <ArchiveFile type="record" />
           <ArchiveFile type="link" />
           <ArchiveFile type="upload" />
-          <ArchiveFile type="mic" />
-          <ArchiveFile type="mic" />
+          <ArchiveFile type="record" />
+          <ArchiveFile type="record" />
           <ArchiveFile type="link" />
           <ArchiveFile type="upload" />
-          <ArchiveFile type="mic" />
+          <ArchiveFile type="record" />
         </div>
         <div
           className={`
@@ -50,7 +51,7 @@ const Archive = () => {
           `}
         >
           <button className="flex justify-center items-center">
-            <img src={leftIcon} alt="" />
+            <LeftIcon />
           </button>
           <button>365</button>
           <div className="flex justify-center items-center">
@@ -65,7 +66,7 @@ const Archive = () => {
           </div>
           <button>1</button>
           <button className="flex justify-center items-center">
-            <img src={rightIcon} alt="" />
+            <RightIcon />
           </button>
         </div>
       </div>

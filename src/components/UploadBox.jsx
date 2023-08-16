@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import centerUploadBtn from "../assets/centerUploadBtn.svg";
-
 import ResultBox from "./ResultBox";
+import { UploadIcon } from "../assets/Icons";
 
 const UploadBox = () => {
   const [uploaded, setUploaded] = useState(false);
@@ -18,12 +17,12 @@ const UploadBox = () => {
       "
       >
         <button
-          className="mb-2"
+          className="mb-2 bg-blue h-16 w-16 rounded-full"
           onClick={() => {
             setUploaded(true);
           }}
         >
-          <img src={centerUploadBtn} alt="upload btn" className="" />
+          <UploadIcon className="h-full w-full p-3"/>
         </button>
         <div className="overflow-scroll max-h-[20vh] py-4">
           <p className="[direction:rtl] max-w-[80ch] text-center text-[#626262] font-light ">

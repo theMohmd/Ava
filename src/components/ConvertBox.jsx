@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-
-import micIcon from "../assets/mic.svg";
-import uploadIcon from "../assets/upload.svg";
-import chainIcon from "../assets/chain.svg";
 import ConvertBoxButton from "./ConvertBoxButton";
-
 import RecordBox from "./RecordBox";
 import UploadBox from "./UploadBox";
 import LinkBox from "./LinkBox";
+import { ChainIcon, MicIcon, UploadIcon } from "../assets/Icons";
 
 const ConvertBox = ({ className }) => {
   const [comp, setComp] = useState(1);
@@ -41,7 +37,7 @@ const ConvertBox = ({ className }) => {
           }}
           color="green"
           active={comp == 1}
-          src={micIcon}
+          Icon={MicIcon}
           text="ضبط صدا"
         />
         <ConvertBoxButton
@@ -51,7 +47,7 @@ const ConvertBox = ({ className }) => {
           }}
           active={comp == 2}
           color="blue"
-          src={uploadIcon}
+          Icon={UploadIcon}
           text="بارگذاری فایل"
         />
         <ConvertBoxButton
@@ -61,7 +57,7 @@ const ConvertBox = ({ className }) => {
           }}
           active={comp == 3}
           color="red"
-          src={chainIcon}
+          Icon={ChainIcon}
           text="لینک"
         />
       </div>

@@ -1,8 +1,6 @@
 import React from "react";
-import logo from "../assets/logo.svg";
 import SideBarButton from "./SideBarButton";
-import speechIcon from "../assets/speech.svg"
-import archiveIcon from "../assets/archive.svg"
+import { ArchiveIcon, LogoIcon, SpeechIcon } from "../assets/Icons";
 
 
 const SideBar = () => {
@@ -24,11 +22,11 @@ const SideBar = () => {
           "
         >
           <p className="text-xl font-[600]">آوا</p>
-          <img src={logo} alt="React Logo" className="h-full w-auto" />
+          <LogoIcon />
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
-          <SideBarButton to="/Ava/" text="تبدیل گفتار" src={speechIcon} />
-          <SideBarButton to="/Ava/archive" text="آرشیو" src={archiveIcon}/>
+          <SideBarButton to="/Ava/" text="تبدیل گفتار" src={<SpeechIcon/> } />
+          <SideBarButton to="/Ava/archive" text="آرشیو" src={<ArchiveIcon/>}/>
         </div>
       </div>
     </div>

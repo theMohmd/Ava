@@ -1,5 +1,6 @@
 import React from "react";
-import centerLinkBtn from "../assets/centerLinkBtn.svg";
+import { ChainIcon } from "../assets/Icons";
+
 const LinkBox = () => {
   return (
     <div
@@ -15,8 +16,8 @@ const LinkBox = () => {
         flex justify-center items-center
         "
       >
-        <button className="">
-          <img src={centerLinkBtn} alt="mic btn" className="" />
+        <button className="h-8 w-8 bg-red rounded-full">
+          <ChainIcon className="h-full w-full p-2"/>
         </button>
         <input
           type="text"

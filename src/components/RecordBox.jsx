@@ -83,9 +83,9 @@ const RecordBox = () => {
         
       >
         {recordingStatus === "inactive" ? (
-          <MicIcon />
+          <MicIcon className="h-full w-full p-3"/>
         ) : (
-          <StopIcon className="m-3"/>
+          <StopIcon className="h-full w-full p-4" fill="none" stroke="white"/>
         )}
       </button>
       <div className="overflow-scroll max-h-[20vh] py-4">
