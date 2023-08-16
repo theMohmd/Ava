@@ -15,6 +15,7 @@ const ResultBox = ({ restart, color, archive }) => {
       className="
         h-full w-full
         grid grid-cols-1 grid-rows-[68fr_285fr_76fr] px-7
+        
         "
     >
       <div

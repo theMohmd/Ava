@@ -9,8 +9,10 @@ const DropDown = ({ className }) => {
     <div
       className={`${className}
       border border-[#00BA9F] rounded-[20px]
-      h-auto w-32 px-4 
+      w-32 px-4 
       text-[#00BA9F]
+      transition-all
+      ${open?"h-20":"h-10"}
       `}
     >
       <button
@@ -26,7 +28,7 @@ const DropDown = ({ className }) => {
         <p className="relative bottom-[2px]">مهمان</p>
         <img src={userIcon} alt="user icon" />
       </button>
-      <div className={open ? "" : "hidden"}>
+      <div className={`${open ? " delay-100" : "[visibility:hidden] "}  `}>
         <button
           onClick={() => {
             setOpen(!open);

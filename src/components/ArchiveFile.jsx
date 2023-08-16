@@ -16,10 +16,11 @@ const ArchiveFile = ({ type }) => {
       grid grid-cols-[160fr_80fr_150fr_95fr_490fr_65fr] grid-rows-${expanded?"[1fr_6fr]":"1"}
       text-center justify-center items-center
       shadow-[1px_1px_5px_0px_rgba(0,0,0,0.05)]
-      py-3 px-2 rounded-[10px]
-      border-${type == "mic"? "green": type == "upload"? "blue" : "red"}
-      ${expanded?"border":""}
+      py-3 px-2 rounded-[10px]  border
+      border-${!expanded ? "white" : type == "mic"? "green": type == "upload"? "blue" : type == "link" ? "red" : "border-white"}
+      
       `}
+      onClick={() => { setExpanded(!expanded) }}
     >
       <div className="grid grid-cols-4 justify-center items-center">
         <button
@@ -85,7 +86,7 @@ const ArchiveFile = ({ type }) => {
       <p className="text-xs">.mp4</p>
       <p className="text-xs">1400-08-20</p>
       <p>https://irsv.upmusics.com/Downloads/Musics/Sirvan%20K ...</p>
-      <div className="flex justify-center items-center" onClick={() => { setExpanded(!expanded) }}>
+      <div className="flex justify-center items-center" >
         <img
           width="32px"
           src={
