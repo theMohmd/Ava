@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ConvertBox from "./ConvertBox";
 import LangSelect from "./LangSelect";
 
 const SpeechToText = () => {
+
+  const [lang, setLang] = useState("fa");
   return (
     <div
       className="
@@ -11,7 +13,7 @@ const SpeechToText = () => {
         grid grid-cols-[33fr_65fr_28fr] grid-rows-[24fr_48fr_21fr]
         "
     >
-      <ConvertBox className="col-start-2 row-start-2" />
+      <ConvertBox lang={lang} className="col-start-2 row-start-2" />
 
       <div
         className="
@@ -41,7 +43,7 @@ const SpeechToText = () => {
       </div>
 
       <div className="col-start-2 row-start-3 py-4">
-        <LangSelect />
+        <LangSelect lang={lang} setLang={setLang}/>
       </div>
     </div>
   );

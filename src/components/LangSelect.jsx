@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { DropIcon } from "../assets/Icons";
-const LangSelect = ({ className }) => {
-  const [lang, setLang] = useState("fa");
+const LangSelect = ({ className, lang, setLang }) => {
   const [open, setOpen] = useState(false);
   return (
     <div

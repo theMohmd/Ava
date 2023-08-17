@@ -5,18 +5,18 @@ import UploadBox from "./UploadBox";
 import LinkBox from "./LinkBox";
 import { ChainIcon, MicIcon, UploadIcon } from "../assets/Icons";
 
-const ConvertBox = ({ className }) => {
+const ConvertBox = ({ className, lang }) => {
   const [comp, setComp] = useState(1);
   const componentSelect = (comp) => {
     switch (comp) {
       case 1:
-        return <RecordBox />;
+        return <RecordBox lang={lang}/>;
 
       case 2:
-        return <UploadBox />;
+        return <UploadBox lang={lang}/>;
 
       default:
-        return <LinkBox />;
+        return <LinkBox lang={lang}/>;
     }
   };
   return (

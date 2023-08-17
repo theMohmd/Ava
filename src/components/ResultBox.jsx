@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PlayBar from "./PlayBar";
 import SimpleDisplay from "./SimpleDisplay";
 import TimedDisplay from "./TimedDisplay";
@@ -10,7 +10,7 @@ import {
   TimeIcon,
 } from "../assets/Icons";
 
-const ResultBox = ({ restart, color, archive }) => {
+const ResultBox = ({ restart, color, archive, data }) => {
   const [displayType, setDisplayType] = useState("simple");
   return (
     <div
@@ -35,7 +35,7 @@ const ResultBox = ({ restart, color, archive }) => {
         >
           <button
             onClick={() => {
-              restart(false);
+              restart("initial");
             }}
             className={`
             flex justify-center items-center gap-2 px-3 py-2
@@ -46,11 +46,23 @@ const ResultBox = ({ restart, color, archive }) => {
             <p className="text-white text-sm">شروع دوباره</p>
             <RefreshIcon />
           </button>
-          <button className={archive ? "hidden" : ""}>
+          <button
+            className={`
+            ${archive ? "hidden" : ""}
+            h-6 w-6 
+            flex justify-center items-center
+            `}
+          >
             <CopyIcon />
           </button>
-          <button className={archive ? "hidden" : ""}>
-            <DownloadIcon />
+          <button
+            className={`
+            ${archive ? "hidden" : ""}
+            h-6 w-6 
+            flex justify-center items-center
+            `}
+          >
+            <DownloadIcon className="fill-[#8F8F8F]" />
           </button>
         </div>
         <div
@@ -106,7 +118,11 @@ const ResultBox = ({ restart, color, archive }) => {
         </div>
       </div>
       <div className="py-8 [direction:rtl] font-light h-[30vh] overflow-scroll">
-        {displayType == "simple" ? <SimpleDisplay /> : <TimedDisplay />}
+        {displayType == "simple" ? (
+          <SimpleDisplay data={data} />
+        ) : (
+          <TimedDisplay data={data} />
+        )}
       </div>
       <div className="flex justify-center items-center ">
         <PlayBar color={color} />
