@@ -53,7 +53,7 @@ const ResultBox = ({ restart, color, archive, data }) => {
             flex justify-center items-center
             `}
           >
-            <CopyIcon />
+            <CopyIcon className="fill-[#8F8F8F]"/>
           </button>
           <button
             className={`

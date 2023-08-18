@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ResultBox from "./ResultBox";
 
+import ReactLoading from "react-loading";
 import {
   MicIcon,
   CopyIcon,
@@ -9,7 +10,6 @@ import {
   WordIcon,
   ChainIcon,
   UploadIcon,
-  WaitIcon,
 } from "../assets/Icons";
 import axios from "axios";
 
@@ -151,18 +151,26 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
               }
             />
           ) : (
-            <WaitIcon
-              className="mt-10"
-              color={
-                type === "record"
-                  ? "#00BA9F"
-                  : type === "upload"
-                  ? "#118AD3"
-                  : type === "Url"
-                  ? "#FF1654"
-                  : null
-              }
-            />
+            <div
+              className="
+        h-full w-full 
+        flex items-center justify-center 
+        pt-5
+        "
+            >
+              <ReactLoading
+                type={"spin"}
+                color={
+                  type === "record"
+                    ? "#00BA9F"
+                    : type === "upload"
+                    ? "#118AD3"
+                    : type === "Url"
+                    ? "#FF1654"
+                    : null
+                }
+              />
+            </div>
           )}
         </div>
       )}

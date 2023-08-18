@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import ResultBox from "./ResultBox";
 import { SendIcon, UploadIcon, WaitIcon } from "../assets/Icons";
 import axios from "axios";
-
+import ReactLoading from "react-loading";
 const UploadBox = ({ lang }) => {
   const [state, setState] = useState("initial");
   const [fileName, setFileName] = useState(null);
+  const [data, setData] = useState(null);
   const inputRef = useRef(null);
   const check = () => {
     if (inputRef.current.value) {
@@ -14,39 +15,41 @@ const UploadBox = ({ lang }) => {
     }
   };
   const send = async () => {
-    
     if (state === "fileSelected") {
       var bodyFormData = new FormData();
       bodyFormData.append("language", lang);
-      bodyFormData.append("media", inputRef.current.value);
-      console.log(inputRef.current.files)
-      // axios
-      //   .post(
-      //     "https://harf.roshan-ai.ir/api/transcribe_files/",
-      //     bodyFormData,
-      //     { headers: { Authorization: import.meta.env.VITE_API_KEY } }
-      //   )
-      //   .then(function (response) {
-      //     console.log(response);
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
+      bodyFormData.append("media", inputRef.current.files[0]);
+      console.log(inputRef.current.files);
+      setState("waiting");
+      axios
+        .post("https://harf.roshan-ai.ir/api/transcribe_files/", bodyFormData, {
+          headers: { Authorization: import.meta.env.VITE_API_KEY },
+        })
+        .then(function (response) {
+          setData(response.data);
+          setState("result");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   };
   if (state === "result") {
-    return <ResultBox restart={setState} color="blue" />;
+    return <ResultBox restart={setState} color="blue" data={data} />;
   } else if (state === "waiting") {
-    return(
+    return (
       <div
         className="
         h-full w-full
         flex justify-center items-center
         "
       >
-        <WaitIcon className="[&>div:after]:bg-blue" />
+        <ReactLoading type={"spin"} color={"#118AD3"} />
+        {/* blue: "#118AD3",
+        green: "#00BA9F",
+        red: "#FF1654" */}
       </div>
-    )
+    );
   } else if (state === "initial" || state === "fileSelected") {
     return (
       <div
@@ -118,6 +121,8 @@ const UploadBox = ({ lang }) => {
         )}
       </div>
     );
+  } else {
+    return (<div>hi</div>)
   }
 };
 

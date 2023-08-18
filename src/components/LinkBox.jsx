@@ -3,6 +3,7 @@ import { ChainIcon, WaitIcon } from "../assets/Icons";
 import axios from "axios";
 import ResultBox from "./ResultBox";
 
+import ReactLoading from "react-loading"
 
 const LinkBox = ({ lang }) => {
   const [data, setData] = useState(null)
@@ -73,7 +74,8 @@ const LinkBox = ({ lang }) => {
         flex justify-center items-center
         "
       >
-        <WaitIcon color="#FF1654" />
+        <ReactLoading type={"spin"} color={"#FF1654"} />
+        
       </div>
     )
   }else if(state === "result"){

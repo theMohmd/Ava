@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import ArchiveFile from "./ArchiveFile";
-import { WaitIcon } from "../assets/Icons";
 import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-
+import ReactLoading from "react-loading"
 const theme = createTheme({
   palette: {
     blue: { main: "#118AD3" },
@@ -126,7 +125,10 @@ const Archive = () => {
         flex items-center justify-center 
         "
       >
-        <WaitIcon color="#00BA9F" />
+        <ReactLoading type={"spin"} color={"#00BA9F"} />
+        {/* blue: "#118AD3",
+        green: "#00BA9F",
+        red: "#FF1654" */}
       </div>
     );
   }
