@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ResultBox from "./ResultBox";
+
 import {
   MicIcon,
   CopyIcon,
@@ -8,10 +9,35 @@ import {
   WordIcon,
   ChainIcon,
   UploadIcon,
+  WaitIcon,
 } from "../assets/Icons";
+import axios from "axios";
 
-const ArchiveFile = ({ type }) => {
+const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
+  const [deleted, setDeleted] = useState(false);
+  const [data, setData] = useState(null);
+  const fetchData = () => {
+    axios
+      .get("https://harf.roshan-ai.ir/api/get_request/" + id, {
+        headers: {
+          Authorization: import.meta.env.VITE_API_KEY,
+        },
+      })
+      .then(function (response) {
+        setData(response.data);
+      });
+  };
+  const deleteReq = () => {
+    refresh(Math.random());
+    setDeleted(true);
+    axios.delete("https://harf.roshan-ai.ir/api/get_request/" + id, {
+      headers: {
+        Authorization: import.meta.env.VITE_API_KEY,
+      },
+    });
+  };
   const [expanded, setExpanded] = useState(false);
+  if (deleted) return <></>;
   return (
     <div
       className={`
@@ -26,7 +52,7 @@ const ArchiveFile = ({ type }) => {
           ? "green"
           : type === "upload"
           ? "blue"
-          : type === "link"
+          : type === "Url"
           ? "red"
           : "border-white"
       }
@@ -40,6 +66,7 @@ const ArchiveFile = ({ type }) => {
           flex justify-center items-center
           hover:bg-[#DC3545] rounded-full 
           "
+          onClick={deleteReq}
         >
           <DeleteIcon className="p-2 h-full w-full hover:stroke-white" />
         </button>
@@ -69,20 +96,22 @@ const ArchiveFile = ({ type }) => {
           <DownloadIcon className="h-full w-full p-2 fill-[#8F8F8F] hover:fill-green" />
         </button>
       </div>
-      <button
+      <div
         className="
         grid grid-cols-[80fr_150fr_95fr_490fr_65fr] 
         text-center justify-center items-center
         "
-        onClick={() => {
-          setExpanded(!expanded);
-        }}
       >
-        <p className="text-xs font-iranSans">4:29</p>
+        <p className="text-xs font-iranSans">{duration}</p>
         <p className="text-xs">.mp4</p>
-        <p className="text-xs font-iranSans">1400-08-20</p>
-        <p>https://irsv.upmusics.com/Downloads/Musics/Sirvan%20K ...</p>
-        <div
+        <p className="text-xs font-iranSans">{date}</p>
+
+        {type === "Url" ? <a>{name}</a> : <p>{name}</p>}
+        <button
+          onClick={() => {
+            setExpanded(!expanded);
+            fetchData();
+          }}
           className={`
           flex justify-center items-center
           h-8 aspect-square rounded-full
@@ -91,7 +120,7 @@ const ArchiveFile = ({ type }) => {
               ? "bg-green"
               : type === "upload"
               ? "bg-blue"
-              : type === "link"
+              : type === "Url"
               ? "bg-red"
               : null
           }
@@ -101,24 +130,42 @@ const ArchiveFile = ({ type }) => {
             <MicIcon />
           ) : type === "upload" ? (
             <UploadIcon />
-          ) : type === "link" ? (
+          ) : type === "Url" ? (
             <ChainIcon />
           ) : null}
-        </div>
-      </button>
-      <div
-        className={`
+        </button>
+      </div>
+      {expanded && (
+        <div
+          className={`
         h-full w-full
         row-start-2 col-start-1 row-end-3 col-end-[-1]
-       
-        ${expanded ? "" : "hidden"}
         `}
-      >
-        <ResultBox
-          archive={true}
-          color={type == "record" ? "green" : type == "upload" ? "blue" : "red"}
-        />
-      </div>
+        >
+          {data ? (
+            <ResultBox
+              data={data.response_data}
+              archive={true}
+              color={
+                type == "record" ? "green" : type == "upload" ? "blue" : "red"
+              }
+            />
+          ) : (
+            <WaitIcon
+              className="mt-10"
+              color={
+                type === "record"
+                  ? "#00BA9F"
+                  : type === "upload"
+                  ? "#118AD3"
+                  : type === "Url"
+                  ? "#FF1654"
+                  : null
+              }
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };

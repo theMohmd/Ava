@@ -14,7 +14,6 @@ const ConvertBoxButton = ({className, Icon, text, onClick, active, color}) => {
     >
       <p>{text}</p>
       <Icon fill={!active?"#969696":"white"}/>
-      {/* <img src={src} alt="icon" className={!active?"[filter:brightness(40%)]":""}/> */}
     </button>
   );
 };

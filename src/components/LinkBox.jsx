@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
-import { ChainIcon } from "../assets/Icons";
+import { ChainIcon, WaitIcon } from "../assets/Icons";
 import axios from "axios";
 import ResultBox from "./ResultBox";
+
 
 const LinkBox = ({ lang }) => {
   const [data, setData] = useState(null)
@@ -66,7 +67,14 @@ const LinkBox = ({ lang }) => {
 
   }else if(state === "waiting"){
     return(
-      <div>waiting</div>
+      <div
+        className="
+        h-full w-full
+        flex justify-center items-center
+        "
+      >
+        <WaitIcon color="#FF1654" />
+      </div>
     )
   }else if(state === "result"){
     return <ResultBox restart={setState} color="red" data={data} />

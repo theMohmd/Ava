@@ -1,36 +1,53 @@
 import React, { useRef, useState } from "react";
 import ResultBox from "./ResultBox";
-import { SendIcon, UploadIcon } from "../assets/Icons";
+import { SendIcon, UploadIcon, WaitIcon } from "../assets/Icons";
 import axios from "axios";
 
-const UploadBox = () => {
-  const [state, setState] = useState("initial")
+const UploadBox = ({ lang }) => {
+  const [state, setState] = useState("initial");
   const [fileName, setFileName] = useState(null);
   const inputRef = useRef(null);
   const check = () => {
     if (inputRef.current.value) {
-      setState("fileSelected")
+      setState("fileSelected");
       setFileName(inputRef.current.files[0].name);
     }
   };
   const send = async () => {
+    
     if (state === "fileSelected") {
-      console.log(import.meta.env.VITE_API_KEY)
-      axios.post('https://harf.roshan-ai.ir/api/transcribe_files/', {
-        language: 'fa',
-        media: inputRef.current.value
-      },{headers:{Authorization: import.meta.env.VITE_API_KEY}})
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      var bodyFormData = new FormData();
+      bodyFormData.append("language", lang);
+      bodyFormData.append("media", inputRef.current.value);
+      console.log(inputRef.current.files)
+      // axios
+      //   .post(
+      //     "https://harf.roshan-ai.ir/api/transcribe_files/",
+      //     bodyFormData,
+      //     { headers: { Authorization: import.meta.env.VITE_API_KEY } }
+      //   )
+      //   .then(function (response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
     }
   };
-  if (state == "uploaded") {
+  if (state === "result") {
     return <ResultBox restart={setState} color="blue" />;
-  } else {
+  } else if (state === "waiting") {
+    return(
+      <div
+        className="
+        h-full w-full
+        flex justify-center items-center
+        "
+      >
+        <WaitIcon className="[&>div:after]:bg-blue" />
+      </div>
+    )
+  } else if (state === "initial" || state === "fileSelected") {
     return (
       <div
         className="
