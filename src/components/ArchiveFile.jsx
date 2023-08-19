@@ -10,11 +10,14 @@ import {
   ChainIcon,
   UploadIcon,
 } from "../assets/Icons";
-import axios from "axios";
+import axios, { Axios } from "axios";
 
 const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
   const [deleted, setDeleted] = useState(false);
   const [data, setData] = useState(null);
+  const download = () => {
+    axios.get(name[0]);
+  };
   const fetchData = () => {
     axios
       .get("/api/get_request/" + id, {
@@ -42,7 +45,7 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
       className={`
       grid grid-cols-[2fr_11fr] grid-rows-${expanded ? "[1fr_6fr]" : "1"}
       text-center justify-center items-center
-      shadow-[1px_1px_5px_0px_rgba(0,0,0,0.05)]
+      even:shadow-[1px_1px_5px_0px_rgba(0,0,0,0.05)]
       py-3 px-2 rounded-[10px]  border
       border-${
         !expanded
@@ -58,54 +61,65 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
       
       `}
     >
-      <div className="grid grid-cols-4 justify-center items-center ">
+      <div className='grid grid-cols-4 justify-center items-center '>
         <button
-          className="
+          className='
           h-8 aspect-square
           flex justify-center items-center
           hover:bg-[#DC3545] rounded-full 
-          "
+          '
           onClick={deleteReq}
         >
-          <DeleteIcon className="p-2 h-full w-full hover:stroke-white" />
+          <DeleteIcon className='p-2 h-full w-full hover:stroke-white' />
         </button>
         <button
-          className="
+          className='
           h-8 aspect-square
           flex justify-center items-center group
-          "
+          '
         >
-          <CopyIcon className="h-full w-full p-2 fill-[#8F8F8F] hover:fill-green" />
+          <CopyIcon className='h-full w-full p-2 fill-[#8F8F8F] hover:fill-green' />
         </button>
         <button
-          className="
+          className='
           h-8 aspect-square
           flex justify-center items-center group
-          "
+          '
         >
-          <WordIcon className="h-full w-full p-[7px] fill-[#8F8F8F] hover:fill-green" />
+          <WordIcon className='h-full w-full p-[7px] fill-[#8F8F8F] hover:fill-green' />
         </button>
         <button
-          className="
+          className='
           h-8 aspect-square
           flex justify-center items-center group
-          "
-          title="۳.۲ مگابایت"
+          '
+          title='۳.۲ مگابایت'
+          onClick={download}
         >
-          <DownloadIcon className="h-full w-full p-2 fill-[#8F8F8F] hover:fill-green" />
+          <DownloadIcon className='h-full w-full p-2 fill-[#8F8F8F] hover:fill-green' />
         </button>
       </div>
       <div
-        className="
+        className='
         grid grid-cols-[80fr_150fr_95fr_490fr_65fr] 
         text-center justify-center items-center
-        "
+        '
       >
-        <p className="text-xs font-iranSans">{duration}</p>
-        <p className="text-xs">.mp4</p>
-        <p className="text-xs font-iranSans">{date}</p>
+        <p className='text-xs font-iranSans'>{duration}</p>
+        <p className='text-xs'>.mp4</p>
+        <p className='text-xs font-iranSans'>{date}</p>
 
-        {type === "Url" ? <a>{name}</a> : <p>{name}</p>}
+        {type === "Url" ? (
+          <a
+            className='h-[1.5rem] overflow-hidden w-[35ch] text-blue'
+            href={name}
+            download='test'
+          >
+            {name}
+          </a>
+        ) : (
+          <p>{name}</p>
+        )}
         <button
           onClick={() => {
             setExpanded(!expanded);
@@ -151,11 +165,11 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
             />
           ) : (
             <div
-              className="
+              className='
         h-full w-full 
         flex items-center justify-center 
         pt-5
-        "
+        '
             >
               <ReactLoading
                 type={"spin"}

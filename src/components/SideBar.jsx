@@ -21,7 +21,7 @@ const SideBar = () => {
           flex items-center justify-center gap-3 text-white
           "
         >
-          <p className="text-xl font-[600]">آوا</p>
+          <p className="text-xl font-[700]">آوا</p>
           <LogoIcon />
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
