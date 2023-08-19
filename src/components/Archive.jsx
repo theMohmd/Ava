@@ -23,7 +23,7 @@ const Archive = () => {
   const container = useRef(null);
   const loadData = () => {
     axios
-      .get("http://harf.roshan-ai.ir/api/requests?page=" + page, {
+      .get("/api/requests?page=" + page, {
         headers: {
           Authorization: import.meta.env.VITE_API_KEY,
         },
@@ -35,6 +35,7 @@ const Archive = () => {
   useEffect(() => {
     if (refresh) {
       if (container.current.children.length === 0) {
+        setData(null)
         loadData();
       }
     }
@@ -76,7 +77,7 @@ const Archive = () => {
           </div>
           <div
             ref={container}
-            className="pl-2 gap-2 flex flex-col overflow-scroll h-[65vh] [direction:rtl] [&>*]:[direction:ltr]"
+            className="pl-2 gap-2 flex flex-col overflow-y-scroll h-[65vh] [direction:rtl] [&>*]:[direction:ltr]"
           >
             {data.results.map((item) => (
               <ArchiveFile

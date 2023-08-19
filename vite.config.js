@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [react()],
   base: '/Ava/',
   server:{
-    cors: false
+    proxy: {
+      '/api': 'https://harf.roshan-ai.ir',
+      
+    },
   }
 })

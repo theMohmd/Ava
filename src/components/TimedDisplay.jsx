@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TimedDisplayElement from "./TimedDisplayElement";
 
 const TimedDisplay = ({ data }) => {
@@ -8,7 +8,6 @@ const TimedDisplay = ({ data }) => {
     <div
       className={`
       [direction:rtl]
-      overflow-scroll
       pl-4
       `}
     >

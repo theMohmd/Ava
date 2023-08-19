@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PlayBar from "./PlayBar";
 import SimpleDisplay from "./SimpleDisplay";
 import TimedDisplay from "./TimedDisplay";
@@ -117,7 +117,7 @@ const ResultBox = ({ restart, color, archive, data }) => {
           </button>
         </div>
       </div>
-      <div className="py-8 [direction:rtl] font-light h-[30vh] overflow-scroll">
+      <div className="py-8 [direction:rtl] font-light h-[30vh] overflow-y-scroll">
         {displayType == "simple" ? (
           <SimpleDisplay data={data} />
         ) : (

@@ -12,6 +12,7 @@ const App = () => {
       h-screen w-screen bg-[#fefefe]
       grid grid-cols-[15fr_2fr] grid-rows-1
       font-iranYekan
+      overflow-hidden
       "
     >
       <DropDown className="absolute top-12 left-12" />

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import ResultBox from "./ResultBox";
-import { SendIcon, UploadIcon, WaitIcon } from "../assets/Icons";
+import { SendIcon, UploadIcon } from "../assets/Icons";
 import axios from "axios";
 import ReactLoading from "react-loading";
 const UploadBox = ({ lang }) => {
@@ -22,7 +22,7 @@ const UploadBox = ({ lang }) => {
       console.log(inputRef.current.files);
       setState("waiting");
       axios
-        .post("https://harf.roshan-ai.ir/api/transcribe_files/", bodyFormData, {
+        .post("/api/transcribe_files/", bodyFormData, {
           headers: { Authorization: import.meta.env.VITE_API_KEY },
         })
         .then(function (response) {
@@ -79,7 +79,7 @@ const UploadBox = ({ lang }) => {
             opacity-0
             
             `}
-            accept=".wav"
+            accept=".wav, .mp4, .mp3"
             onChange={check}
           />
 
@@ -111,7 +111,7 @@ const UploadBox = ({ lang }) => {
             </button>
           </div>
         ) : (
-          <div className="overflow-scroll max-h-[20vh] py-4">
+          <div className=" max-h-[20vh] py-4">
             <p className="[direction:rtl] max-w-[80ch] text-center text-[#626262] font-light ">
               برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
               <br />
@@ -121,9 +121,7 @@ const UploadBox = ({ lang }) => {
         )}
       </div>
     );
-  } else {
-    return (<div>hi</div>)
-  }
+  } 
 };
 
 export default UploadBox;

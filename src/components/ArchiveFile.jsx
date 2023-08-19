@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ResultBox from "./ResultBox";
-
 import ReactLoading from "react-loading";
 import {
   MicIcon,
@@ -18,7 +17,7 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
   const [data, setData] = useState(null);
   const fetchData = () => {
     axios
-      .get("https://harf.roshan-ai.ir/api/get_request/" + id, {
+      .get("/api/get_request/" + id, {
         headers: {
           Authorization: import.meta.env.VITE_API_KEY,
         },
@@ -30,7 +29,7 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
   const deleteReq = () => {
     refresh(Math.random());
     setDeleted(true);
-    axios.delete("https://harf.roshan-ai.ir/api/get_request/" + id, {
+    axios.delete("/api/get_request/" + id, {
       headers: {
         Authorization: import.meta.env.VITE_API_KEY,
       },

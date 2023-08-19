@@ -88,7 +88,7 @@ const RecordBox = () => {
           <StopIcon className="h-full w-full p-4" fill="none" stroke="white"/>
         )}
       </button>
-      <div className="overflow-scroll max-h-[20vh] py-4">
+      <div className="max-h-[20vh] py-4">
         <p className="[direction:rtl] max-w-[80ch] text-center text-[#626262] font-light">
           برای شروع به صحبت، دکمه را فشار دهید
           <br />
