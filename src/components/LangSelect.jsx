@@ -7,7 +7,7 @@ const LangSelect = ({ className, lang, setLang }) => {
       className={`${className}
       h-auto
       flex justify-start items-center gap-3
-      
+      text-sm
       `}
     >
       <div

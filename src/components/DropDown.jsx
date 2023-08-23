@@ -8,7 +8,7 @@ const DropDown = ({ className }) => {
       className={`${className}
       border border-[#00BA9F] rounded-[20px]
       w-32 px-4 
-      text-[#00BA9F]
+      text-[#00BA9F] text-[15px]
       transition-all
       ${open?"h-20":"h-10"}
       `}

@@ -43,9 +43,9 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
   return (
     <div
       className={`
-      grid grid-cols-[2fr_11fr] grid-rows-${expanded ? "[1fr_6fr]" : "1"}
+      grid grid-cols-[128px_1fr] grid-rows-${expanded ? "[1fr_6fr]" : "1"}
       text-center justify-center items-center
-      even:shadow-[1px_1px_5px_0px_rgba(0,0,0,0.05)]
+      hover:shadow-[1px_1px_5px_0px_rgba(0,0,0,0.05)]
       py-3 px-2 rounded-[10px]  border
       border-${
         !expanded
@@ -101,19 +101,19 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
       </div>
       <div
         className='
-        grid grid-cols-[80fr_150fr_95fr_490fr_65fr] 
+        grid grid-cols-[80fr_150fr_95fr_490fr_65fr] gap-2
         text-center justify-center items-center
         '
       >
         <p className='text-xs font-iranSans'>{duration}</p>
         <p className='text-xs'>.mp4</p>
-        <p className='text-xs font-iranSans'>{date}</p>
+        <p className='text-xs font-iranSans'>{date.substr(0,10)}</p>
 
         {type === "Url" ? (
           <a
-            className='h-[1.5rem] overflow-hidden w-[35ch] text-blue'
+            className='justify-self-end h-[1.5rem] overflow-hidden text-blue text-end'
             href={name}
-            download='test'
+            
           >
             {name}
           </a>
@@ -127,7 +127,7 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
           }}
           className={`
           flex justify-center items-center
-          h-8 aspect-square rounded-full
+          h-8 aspect-square rounded-full justify-self-end
           ${
             type === "record"
               ? "bg-green"

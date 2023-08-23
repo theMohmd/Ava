@@ -64,8 +64,8 @@ const Archive = () => {
           <div
             className="
             pr-2 pl-4
-            grid grid-cols-[160fr_80fr_150fr_95fr_390fr_100fr_65fr] grid-rows-1
-            justify-center items-center text-center
+            grid grid-cols-[128px_80fr_150fr_95fr_390fr_100fr_65fr] grid-rows-1
+            justify-center items-center text-center gap-2
             "
           >
             <p className="text-sm [direction:rtl] col-start-2 ">مدت زمان</p>
@@ -77,7 +77,7 @@ const Archive = () => {
           </div>
           <div
             ref={container}
-            className="pl-2 gap-2 flex flex-col overflow-y-scroll h-[65vh] [direction:rtl] [&>*]:[direction:ltr]"
+            className="pl-2 gap-3 flex flex-col overflow-y-scroll h-[65vh] [direction:rtl] [&>*]:[direction:ltr]"
           >
             {data.results.map((item) => (
               <ArchiveFile
