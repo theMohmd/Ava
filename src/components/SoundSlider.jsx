@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 
 const SoundSlider = ({color}) => {
+  const sliderRef = useRef()
+  const progressRef = useRef()
   const update = () => {
-    const val = document.getElementById(`soundSliderInput`).value;
-    document.getElementById(`soundSliderProgress`).style.width = val + "%";
+    const val = sliderRef.current.value;
+    progressRef.current.style.width = val + "%";
   };
   return (
     <div
@@ -14,7 +16,7 @@ const SoundSlider = ({color}) => {
         "
     >
       <input
-        id={`soundSliderInput`}
+        ref={sliderRef}
         className={`
           row-start-1 col-start-1
           z-30 
@@ -24,7 +26,7 @@ const SoundSlider = ({color}) => {
         type="range"
       />
       <div
-        id={`soundSliderProgress`}
+        ref={progressRef}
         className={`
           row-start-1 col-start-1
           z-20

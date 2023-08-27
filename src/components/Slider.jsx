@@ -1,34 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const Slider = ({ color }) => {
-  const [id, setId] = useState();
+const Slider = ({ color, thumb = true, sliderRef = useRef(), onChange}) => {
+  const sliderProgressRef = useRef();
 
-  useEffect(() => {
-    setId(Math.random());
-  }, []);
   const update = () => {
-    const val = document.getElementById(`sliderInput${id}`).value;
-    document.getElementById(`sliderProgress${id}`).style.width = val + "%";
+    sliderProgressRef.current.style.width = (sliderRef.current.value / sliderRef.current.max * 100 ) + "%";
   };
+  
   return (
     <div
-      className="
+      className='
         grid grid-cols-1 grid-rows-1
         justify-center items-center
         w-full
-        "
+        '
     >
       <input
-        id={`sliderInput${id}`}
+        ref={sliderRef}
         className={`
           row-start-1 col-start-1
-          z-30 thumb-${color}
+          z-30 ${color} ${!thumb ? "opacity-0" : null}
           `}
-        onChange={update}
-        type="range"
+        onChange={() => { onChange();update() }}
+        type='range'
       />
       <div
-        id={`sliderProgress${id}`}
+        ref={sliderProgressRef}
         className={`
           row-start-1 col-start-1
           z-20
@@ -39,24 +36,23 @@ const Slider = ({ color }) => {
           `}
       ></div>
       <div
-        id={`sliderPreload${id}`}
-        className="
+        className='
           row-start-1 col-start-1
           z-10
           h-[1px]
           w-1/2
           bg-[#898989]
           rounded-full
-          "
+          '
       ></div>
       <div
-        className="
+        className='
           row-start-1 col-start-1
           z-0
           w-full h-[1px]
           bg-[#C6C6C6]
           rounded-full
-          "
+          '
       ></div>
     </div>
   );

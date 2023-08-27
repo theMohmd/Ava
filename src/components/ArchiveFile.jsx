@@ -111,7 +111,7 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
 
         {type === "Url" ? (
           <a
-            className='justify-self-end h-[1.5rem] overflow-hidden text-blue text-end'
+            className='justify-self-end h-[1.5rem] w-[300px] overflow-hidden text-blue text-end'
             href={name}
             
           >

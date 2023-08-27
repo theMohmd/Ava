@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PlayBar from "./PlayBar";
 import SimpleDisplay from "./SimpleDisplay";
 import TimedDisplay from "./TimedDisplay";
@@ -11,6 +11,7 @@ import {
 } from "../assets/Icons";
 
 const ResultBox = ({ restart, color, archive, data }) => {
+  
   const [displayType, setDisplayType] = useState("simple");
   return (
     <div
@@ -125,7 +126,7 @@ const ResultBox = ({ restart, color, archive, data }) => {
         )}
       </div>
       <div className="flex justify-center items-center ">
-        <PlayBar color={color} />
+        <PlayBar color={color} url={data[0].media_url}/>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Archive from "./components/Archive";
 
 import DropDown from "./components/DropDown";
+import PlayBar from "./components/PlayBar";
 const App = () => {
   return (
     <div

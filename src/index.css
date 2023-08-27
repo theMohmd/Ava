@@ -35,3 +35,63 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+
+
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type="range"] {
+   -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+  outline: none;
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+   appearance: none;
+
+   height: 14px;
+   width: 14px;
+   border-radius: 100%;
+}
+input[type="range"].red::-webkit-slider-thumb {
+  background-color: #FF1654;
+}
+input[type="range"].green::-webkit-slider-thumb {
+  background-color: #00BA9F;
+}
+input[type="range"].blue::-webkit-slider-thumb {
+  background-color: #118AD3;
+}
+
+/******** Firefox styles ********/
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+   border: none; /*Removes extra border that FF applies*/
+   /*custom styles*/
+   height: 14px;
+   width: 14px;
+   border-radius: 100%;
+   
+}
+
+input[type="range"]::-webkit-range-thumb {
+  background-color: #FF1654;
+}
+input[type="range"].green::-webkit-range-thumb {
+  background-color: #00BA9F;
+}
+input[type="range"].blue::-webkit-range-thumb {
+  background-color: #118AD3;
+}
