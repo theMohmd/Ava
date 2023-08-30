@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PlayBar from "./PlayBar";
+
 import SimpleDisplay from "./SimpleDisplay";
 import TimedDisplay from "./TimedDisplay";
 
@@ -8,22 +8,20 @@ import {
   CopyIcon,
   DownloadIcon,
   RefreshIcon,
+  StopIcon,
   TextIcon,
   TimeIcon,
 } from "../assets/Icons";
-const colors= {
-  blue: "#118AD3",
-  green: "#00BA9F",
-  red: "#FF1654"
-}
-const ResultBox = ({ restart, color, archive = false, data }) => {
+
+const RecordResultBox = ({ restart, color, data, stop, state }) => {
   const [displayType, setDisplayType] = useState("simple");
+
   if (data) {
     return (
       <div
         className='
-      h-full w-full
-      grid grid-cols-1 grid-rows-[68fr_285fr_76fr] px-7
+        h-full w-full
+        grid grid-cols-1 grid-rows-[68fr_360fr] px-7
         '
       >
         <div
@@ -40,6 +38,23 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             
             '
           >
+            {state === "recording" && (
+              <button
+                className={`
+                flex justify-center items-center gap-2 
+                bg-${color} rounded-[20px]
+                aspect-square h-8 relative p-1 flex justify-center items-center 
+                `}
+                onClick={stop}
+                disabled={state !== "recording"}
+              >
+                {state === "recording" ? (
+                  <span className='h-full w-full bg-red animate-ping rounded-full absolute top-0 left-0' />
+                ) : null}
+
+                <StopIcon className='stroke-white fill-none' />
+              </button>
+            )}
             <button
               onClick={() => {
                 restart("initial");
@@ -47,7 +62,7 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
               className={`
             flex justify-center items-center gap-2 px-3 py-2
             bg-${color} rounded-[20px]
-            ${archive ? "hidden" : ""}
+            
             `}
             >
               <p className='text-white text-sm'>شروع دوباره</p>
@@ -55,7 +70,6 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             </button>
             <button
               className={`
-            ${archive ? "hidden" : ""}
             h-6 w-6 
             flex justify-center items-center
             `}
@@ -64,7 +78,6 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             </button>
             <button
               className={`
-            ${archive ? "hidden" : ""}
             h-6 w-6 
             flex justify-center items-center
             `}
@@ -124,20 +137,17 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             </button>
           </div>
         </div>
+
         <div className='py-8 [direction:rtl] font-light h-[30vh] overflow-y-scroll'>
           {displayType == "simple" ? (
-            <SimpleDisplay data={data[0].segments} />
+            <SimpleDisplay data={data} />
           ) : (
-            <TimedDisplay data={data[0].segments} />
+            <TimedDisplay data={data} />
           )}
-        </div>
-        <div className='flex justify-center items-center '>
-          <PlayBar color={color} url={data[0].media_url} />
         </div>
       </div>
     );
   } else {
-    
     return (
       <div
         className='
@@ -145,10 +155,10 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
       flex justify-center items-center
       '
       >
-        <ReactLoading type={"spin"} color={colors['color']} />
+        <ReactLoading type={"spin"} color={"#00BA9F"} />
       </div>
     );
   }
 };
 
-export default ResultBox;
+export default RecordResultBox;

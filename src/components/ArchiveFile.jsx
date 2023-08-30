@@ -111,14 +111,14 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
 
         {type === "Url" ? (
           <a
-            className='justify-self-end h-[1.5rem] w-[300px] overflow-hidden text-blue text-end'
+            className= "px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis text-blue"
             href={name}
             
           >
             {name}
           </a>
         ) : (
-          <p>{name}</p>
+          <p className="px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis">{name}</p>
         )}
         <button
           onClick={() => {

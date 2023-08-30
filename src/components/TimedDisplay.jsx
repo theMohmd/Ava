@@ -11,7 +11,7 @@ const TimedDisplay = ({ data }) => {
       pl-4
       `}
     >
-      {data[0].segments.map((item, index) => (
+      {data.map((item, index) => (
         <TimedDisplayElement
           text={item.text}
           startT={item.start}

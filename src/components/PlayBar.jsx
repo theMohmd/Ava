@@ -22,11 +22,12 @@ const PlayBar = ({ color, url }) => {
   const sliderProgressRef = useRef();
   const volumeSliderRef = useRef();
   const volumeProgressRef = useRef();
-
   const onLoadedMetadata = () => {
     const seconds = audioRef.current.duration;
     setDuration(seconds);
     sliderRef.current.max = Math.floor(seconds);
+    setLoaded(true);
+    
   };
 
   const togglePlayPause = () => {
@@ -34,17 +35,17 @@ const PlayBar = ({ color, url }) => {
   };
 
   const repeat = useCallback(() => {
-    const currentTime = audioRef.current.currentTime;
-    setTimeProgress(currentTime);
-    sliderRef.current.value = currentTime;
-    sliderProgressRef.current.style.width = `${
-      (sliderRef.current.value / duration) * 100
-    }%`;
-
-    bufferRef.current.style.width = `${
-      (100 * audioRef.current.buffered.end(0)) / audioRef.current.duration
-    }%`;
-
+    if (audioRef.current) {
+      const currentTime = audioRef.current.currentTime;
+      setTimeProgress(currentTime);
+      sliderRef.current.value = currentTime;
+      sliderProgressRef.current.style.width = `${
+        (sliderRef.current.value / duration) * 100
+      }%`;
+      bufferRef.current.style.width = `${
+        (100 * audioRef.current.buffered.end(0)) / audioRef.current.duration
+      }%`;
+    }
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [audioRef, duration, sliderRef, setTimeProgress]);
 
@@ -75,9 +76,8 @@ const PlayBar = ({ color, url }) => {
   useEffect(() => {
     if (audioRef) {
       audioRef.current.volume = volume / 100;
-      audioRef.current.muted = muteVolume;
     }
-  }, [volume, audioRef, muteVolume]);
+  }, [volume, audioRef]);
 
   return (
     <>
@@ -87,8 +87,6 @@ const PlayBar = ({ color, url }) => {
         onLoadedMetadata={onLoadedMetadata}
         onEnded={() => {
           setIsPlaying(false);
-
-          console.log("end");
         }}
       />
       <div
@@ -141,7 +139,7 @@ const PlayBar = ({ color, url }) => {
               row-start-1 col-start-1
               z-20
               h-[3px]
-              w-1/2
+              w-0
               bg-${color}
               rounded-full
               `}
@@ -152,7 +150,7 @@ const PlayBar = ({ color, url }) => {
               row-start-1 col-start-1
               z-10
               h-[1px]
-              w-1/2
+              w-0
               bg-[#898989]
               rounded-full
               '
@@ -214,7 +212,7 @@ const PlayBar = ({ color, url }) => {
                 row-start-1 col-start-1
                 z-20
                 h-[2px]
-                w-1/2
+                w-[60%]
                 bg-${color}
                 rounded-full
                 `}
