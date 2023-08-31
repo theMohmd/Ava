@@ -22,7 +22,7 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
   const copyAction = async () => {
     if (!data) {
       axios
-        .get("/api/get_request/" + id, {
+        .get("https://harf.roshan-ai.ir/api/get_request/" + id, {
           headers: {
             Authorization: import.meta.env.VITE_API_KEY,
           },
@@ -61,7 +61,7 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
   const fetchData = async () => {
     if (!data) {
       axios
-        .get("/api/get_request/" + id, {
+        .get("https://harf.roshan-ai.ir/api/get_request/" + id, {
           headers: {
             Authorization: import.meta.env.VITE_API_KEY,
           },
@@ -74,7 +74,7 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
   const deleteReq = () => {
     refresh(Math.random());
     setDeleted(true);
-    axios.delete("/api/get_request/" + id, {
+    axios.delete("https://harf.roshan-ai.ir/api/get_request/" + id, {
       headers: {
         Authorization: import.meta.env.VITE_API_KEY,
       },

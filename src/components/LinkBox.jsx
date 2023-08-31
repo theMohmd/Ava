@@ -14,7 +14,7 @@ const LinkBox = ({ lang }) => {
       setState("waiting");
       axios
         .post(
-          "/api/transcribe_files/",
+          "https://harf.roshan-ai.ir/api/transcribe_files/",
           {
             media_urls: [inputRef.current.value],
             language: lang,

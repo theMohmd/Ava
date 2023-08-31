@@ -23,7 +23,7 @@ const Archive = () => {
   const container = useRef(null);
   const loadData = () => {
     axios
-      .get("/api/requests?page=" + page, {
+      .get("https://harf.roshan-ai.ir/api/requests?page=" + page, {
         headers: {
           Authorization: import.meta.env.VITE_API_KEY,
         },

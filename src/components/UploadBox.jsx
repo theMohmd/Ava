@@ -21,7 +21,7 @@ const UploadBox = ({ lang }) => {
       bodyFormData.append("media", inputRef.current.files[0]);
       setState("waiting");
       axios
-        .post("/api/transcribe_files/", bodyFormData, {
+        .post("https://harf.roshan-ai.ir/api/transcribe_files/", bodyFormData, {
           headers: { Authorization: import.meta.env.VITE_API_KEY },
         })
         .then(function (response) {
