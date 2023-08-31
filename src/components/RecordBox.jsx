@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { StopIcon, MicIcon } from "../assets/Icons";
+import { MicIcon } from "../assets/Icons";
 import ReactLoading from "react-loading";
 import RecordResultBox from "./RecordResultBox";
 const WS_URL = import.meta.env.VITE_WS_URL;
@@ -15,8 +15,6 @@ const RecordBox = () => {
   const ws = useRef();
   useEffect(() => {
     if (message) {
-      console.log(message);
-      console.log(data);
       setData((prev) => {
         if (prev.length > 0) {
           if (prev[prev.length - 1].segment_id === message.segment_id) {
@@ -33,7 +31,6 @@ const RecordBox = () => {
   }, [data, message]);
 
   const onSocketMessage = (event) => {
-    // setData((prev) => [...prev, JSON.parse(event.data)]);
     setMessage(JSON.parse(event.data));
   };
   useEffect(() => {
@@ -42,12 +39,12 @@ const RecordBox = () => {
       ws.current = new WebSocket(WS_URL);
 
       ws.current.addEventListener("open", () => {
-        console.log("connected");
+        // console.log("connected");
         setRecordingStatus("ready");
       });
       ws.current.addEventListener("message", onSocketMessage);
       ws.current.addEventListener("close", () => {
-        console.log("closed");
+        // console.log("closed");
       });
     }
   }, [ws, recordingStatus]);
@@ -124,7 +121,7 @@ const RecordBox = () => {
       '
       >
         <button
-          className={`bg-green mb-2 rounded-full relative h-16 w-16 ${
+          className={`bg-green mb-2 rounded-full relative h-16 w-16 hover:opacity-90 ${
             recordingStatus === "recording" ? "animate-bounce" : ""
           }`}
           onClick={startRecording}
@@ -157,9 +154,9 @@ const RecordBox = () => {
         ) : (
           <div
             className='
-        h-full w-full
-        flex justify-center items-center
-        '
+            h-full w-full
+            flex justify-center items-center
+            '
           >
             <ReactLoading type={"spin"} color={"#00BA9F"} />
           </div>

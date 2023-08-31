@@ -26,9 +26,9 @@ const RecordResultBox = ({ restart, color, data, stop, state }) => {
       >
         <div
           className='
-        h-full
-        flex justify-between items-center 
-        border-b border-[rgba(0,0,0,0.25)]
+          h-full
+          flex justify-between items-center 
+          border-b border-[rgba(0,0,0,0.25)]
           '
         >
           <div
@@ -60,51 +60,51 @@ const RecordResultBox = ({ restart, color, data, stop, state }) => {
                 restart("initial");
               }}
               className={`
-            flex justify-center items-center gap-2 px-3 py-2
-            bg-${color} rounded-[20px]
-            
-            `}
+              flex justify-center items-center gap-2 px-3 py-2
+              bg-${color} rounded-[20px]
+              
+              `}
             >
               <p className='text-white text-sm'>شروع دوباره</p>
               <RefreshIcon />
             </button>
             <button
               className={`
-            h-6 w-6 
-            flex justify-center items-center
-            `}
+              h-6 w-6 
+              flex justify-center items-center
+              `}
             >
               <CopyIcon className='fill-[#8F8F8F]' />
             </button>
             <button
               className={`
-            h-6 w-6 
-            flex justify-center items-center
-            `}
+              h-6 w-6 
+              flex justify-center items-center
+              `}
             >
               <DownloadIcon className='fill-[#8F8F8F]' />
             </button>
           </div>
           <div
             className='
-          flex gap-7 h-full 
-          '
+            flex gap-7 h-full 
+            '
           >
             <button
               onClick={() => {
                 setDisplayType("timed");
               }}
               className={`
-            flex justify-center items-center gap-2 p-2 border-black
-            relative bottom-[-1px]
-            ${displayType == "timed" ? "border-b" : "font-light "}
-            `}
+              flex justify-center items-center gap-2 p-2 border-black
+              relative bottom-[-1px]
+              ${displayType == "timed" ? "border-b" : "font-light "}
+              `}
             >
               <p
                 className={`
-              text-sm
-              ${displayType !== "timed" ? "opacity-60" : null}
-              `}
+                text-sm
+                ${displayType !== "timed" ? "opacity-60" : null}
+                `}
               >
                 متن زمان‌بندی شده
               </p>
@@ -138,7 +138,7 @@ const RecordResultBox = ({ restart, color, data, stop, state }) => {
           </div>
         </div>
 
-        <div className='py-8 [direction:rtl] font-light h-[30vh] overflow-y-scroll'>
+        <div className='py-8 [direction:rtl] font-light h-[30vh] overflow-y-auto'>
           {displayType == "simple" ? (
             <SimpleDisplay data={data} />
           ) : (

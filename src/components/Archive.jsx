@@ -3,7 +3,7 @@ import ArchiveFile from "./ArchiveFile";
 import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import ReactLoading from "react-loading"
+import ReactLoading from "react-loading";
 const theme = createTheme({
   palette: {
     blue: { main: "#118AD3" },
@@ -12,8 +12,8 @@ const theme = createTheme({
   },
   direction: "rtl",
   typography: {
-    "fontFamily": `"IranSans", sans-serif`,
-   },
+    fontFamily: `"IranSans", sans-serif`,
+  },
 });
 
 const Archive = () => {
@@ -35,7 +35,7 @@ const Archive = () => {
   useEffect(() => {
     if (refresh) {
       if (container.current.children.length === 0) {
-        setData(null)
+        setData(null);
         loadData();
       }
     }
@@ -49,35 +49,35 @@ const Archive = () => {
   if (data) {
     return (
       <div
-        className="
+        className='
         pr-40 pl-32 pt-24 py-20
         grid grid-cols-1 grid-rows-[1fr_10fr]
-        "
+        '
       >
-        <h1 className="[direction:rtl] text-2xl text-green ">آرشیو من</h1>
+        <h1 className='[direction:rtl] text-2xl text-green '>آرشیو من</h1>
         <div
-          className="
+          className='
           w-full h-full
           grid grid-cols-1 grid-rows-[7fr_60fr_10fr]
-          "
+          '
         >
           <div
-            className="
+            className='
             pr-2 pl-4
             grid grid-cols-[128px_80fr_150fr_95fr_390fr_100fr_65fr] grid-rows-1
             justify-center items-center text-center gap-2
-            "
+            '
           >
-            <p className="text-sm [direction:rtl] col-start-2 ">مدت زمان</p>
-            <p className="text-sm [direction:rtl] col-start-3 ">نوع فایل</p>
-            <p className="text-sm [direction:rtl] col-start-4 ">
+            <p className='text-sm [direction:rtl] col-start-2 '>مدت زمان</p>
+            <p className='text-sm [direction:rtl] col-start-3 '>نوع فایل</p>
+            <p className='text-sm [direction:rtl] col-start-4 '>
               تاریخ بارگذاری
             </p>
-            <p className="text-sm [direction:rtl] col-start-6 ">نام فایل</p>
+            <p className='text-sm [direction:rtl] col-start-6 '>نام فایل</p>
           </div>
           <div
             ref={container}
-            className="pl-2 gap-3 flex flex-col overflow-y-scroll h-[65vh] [direction:rtl] [&>*]:[direction:ltr]"
+            className='pl-2 gap-3 flex flex-col overflow-y-auto h-[65vh] [direction:rtl] [&>*]:[direction:ltr]'
           >
             {data.results.map((item) => (
               <ArchiveFile
@@ -98,14 +98,13 @@ const Archive = () => {
               
             `}
           >
-           
             <ThemeProvider theme={theme}>
               <Pagination
                 onChange={(event, page) => {
                   setPage(page);
                 }}
                 count={Math.ceil(data.count / 10)}
-                color="green"
+                color='green'
                 sx={{
                   direction: "rtl",
                   "& .Mui-selected": {
@@ -121,15 +120,12 @@ const Archive = () => {
   } else {
     return (
       <div
-        className="
+        className='
         h-full w-full 
         flex items-center justify-center 
-        "
+        '
       >
         <ReactLoading type={"spin"} color={"#00BA9F"} />
-        {/* blue: "#118AD3",
-        green: "#00BA9F",
-        red: "#FF1654" */}
       </div>
     );
   }

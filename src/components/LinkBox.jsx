@@ -23,7 +23,6 @@ const LinkBox = ({ lang }) => {
         )
         .then(function (response) {
           setData(response.data);
-          setState("result");
         })
         .catch(function (error) {
           setState("initial");
@@ -46,7 +45,10 @@ const LinkBox = ({ lang }) => {
           flex justify-center items-center
           '
         >
-          <button className='h-8 w-8 bg-red rounded-full' onClick={send}>
+          <button
+            className='h-8 w-8 bg-red rounded-full hover:opacity-90'
+            onClick={send}
+          >
             <ChainIcon className='h-full w-full p-2' />
           </button>
           <input

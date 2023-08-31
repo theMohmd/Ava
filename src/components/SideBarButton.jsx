@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SideBarButton = ({className, src, text, to}) => {
+const SideBarButton = ({ className, src, text, to }) => {
   return (
     <NavLink
       to={to}

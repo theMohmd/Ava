@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ResultBox from "./ResultBox";
 import ReactLoading from "react-loading";
 import {
@@ -10,24 +10,66 @@ import {
   ChainIcon,
   UploadIcon,
 } from "../assets/Icons";
-import axios, { Axios } from "axios";
+import axios from "axios";
 
-const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
+const ArchiveFile = ({ name, date, refresh, duration, id }) => {
   const [deleted, setDeleted] = useState(false);
   const [data, setData] = useState(null);
-  const download = () => {
-    axios.get(name[0]);
-  };
-  const fetchData = () => {
-    axios
-      .get("/api/get_request/" + id, {
-        headers: {
-          Authorization: import.meta.env.VITE_API_KEY,
-        },
-      })
-      .then(function (response) {
-        setData(response.data);
+  const [type, setType] = useState(); // Url, upload, record
+  const once = useRef();
+  const [extension, setExtension] = useState();
+
+  const copyAction = async () => {
+    if (!data) {
+      axios
+        .get("/api/get_request/" + id, {
+          headers: {
+            Authorization: import.meta.env.VITE_API_KEY,
+          },
+        })
+        .then(function (response) {
+          setData(response.data);
+          var text = "";
+          response.data.response_data[0].segments.forEach((element) => {
+            text += element.text + " ";
+          });
+          navigator.clipboard.writeText(text);
+        });
+    } else {
+      var text = "";
+      data.response_data[0].segments.forEach((element) => {
+        text += element.text + " ";
       });
+      navigator.clipboard.writeText(text);
+    }
+  };
+  const findType = (input) => {
+    var temp = input.substr(input.length - 5);
+    var tempArr = temp.split(".");
+    return tempArr.pop();
+  };
+  useEffect(() => {
+    if (typeof name === "string") {
+      setExtension(findType(name));
+      setType("upload");
+    } else {
+      setType("Url");
+      setExtension("link");
+    }
+  }, [once]);
+
+  const fetchData = async () => {
+    if (!data) {
+      axios
+        .get("/api/get_request/" + id, {
+          headers: {
+            Authorization: import.meta.env.VITE_API_KEY,
+          },
+        })
+        .then(function (response) {
+          setData(response.data);
+        });
+    }
   };
   const deleteReq = () => {
     refresh(Math.random());
@@ -77,6 +119,7 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
           h-8 aspect-square
           flex justify-center items-center group
           '
+          onClick={copyAction}
         >
           <CopyIcon className='h-full w-full p-2 fill-[#8F8F8F] hover:fill-green' />
         </button>
@@ -94,7 +137,6 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
           flex justify-center items-center group
           '
           title='۳.۲ مگابایت'
-          onClick={download}
         >
           <DownloadIcon className='h-full w-full p-2 fill-[#8F8F8F] hover:fill-green' />
         </button>
@@ -106,19 +148,20 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
         '
       >
         <p className='text-xs font-iranSans'>{duration}</p>
-        <p className='text-xs'>.mp4</p>
-        <p className='text-xs font-iranSans'>{date.substr(0,10)}</p>
+        <p className='text-xs'>{extension}</p>
+        <p className='text-xs font-iranSans'>{date.substr(0, 10)}</p>
 
         {type === "Url" ? (
           <a
-            className= "px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis text-blue"
+            className='px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis text-blue'
             href={name}
-            
           >
             {name}
           </a>
         ) : (
-          <p className="px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis">{name}</p>
+          <p className='px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis'>
+            {name}
+          </p>
         )}
         <button
           onClick={() => {
@@ -166,10 +209,10 @@ const ArchiveFile = ({ type, name, date, refresh, duration, id }) => {
           ) : (
             <div
               className='
-        h-full w-full 
-        flex items-center justify-center 
-        pt-5
-        '
+              h-full w-full 
+              flex items-center justify-center 
+              pt-5
+              '
             >
               <ReactLoading
                 type={"spin"}

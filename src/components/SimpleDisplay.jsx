@@ -3,7 +3,7 @@ import React from "react";
 const SimpleDisplay = ({ data }) => {
   return (
     <div>
-      <p>{data.map((item, index) => item.text + " ")}</p>
+      <p>{data.map((item) => item.text + " ")}</p>
     </div>
   );
 };

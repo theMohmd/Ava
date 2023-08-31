@@ -1,19 +1,20 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-// import { Slider } from "@mui/material";
-import Slider from "./Slider";
 import { PauseIcon, PlayIcon, StopIcon, VolumeIcon } from "../assets/Icons";
 const colorConvert = {
   blue: "#118AD3",
   green: "#00BA9F",
   red: "#FF1654",
 };
+const duration2second = (input) => {
+  var a = input.split(":");
+  var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
+  return seconds;
+};
 
-const PlayBar = ({ color, url }) => {
+const PlayBar = ({ color, url, duration }) => {
   const [timeProgress, setTimeProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(60);
-  const [muteVolume, setMuteVolume] = useState(false);
 
   const bufferRef = useRef();
   const audioRef = useRef();
@@ -23,11 +24,7 @@ const PlayBar = ({ color, url }) => {
   const volumeSliderRef = useRef();
   const volumeProgressRef = useRef();
   const onLoadedMetadata = () => {
-    const seconds = audioRef.current.duration;
-    setDuration(seconds);
-    sliderRef.current.max = Math.floor(seconds);
-    setLoaded(true);
-    
+    sliderRef.current.max = Math.floor(duration2second(duration));
   };
 
   const togglePlayPause = () => {
@@ -39,15 +36,20 @@ const PlayBar = ({ color, url }) => {
       const currentTime = audioRef.current.currentTime;
       setTimeProgress(currentTime);
       sliderRef.current.value = currentTime;
+      //progress
       sliderProgressRef.current.style.width = `${
-        (sliderRef.current.value / duration) * 100
+        (sliderRef.current.value / Math.floor(duration2second(duration))) * 100
       }%`;
-      bufferRef.current.style.width = `${
-        (100 * audioRef.current.buffered.end(0)) / audioRef.current.duration
-      }%`;
+      //buffer
+      if (audioRef.current.buffered.length === 1) {
+        bufferRef.current.style.width = `${
+          (100 * Math.floor(audioRef.current.buffered.end(0))) /
+          Math.floor(duration2second(duration))
+        }%`;
+      }
     }
     playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [audioRef, duration, sliderRef, setTimeProgress]);
+  }, [audioRef, sliderRef, setTimeProgress]);
 
   const handleProgressChange = () => {
     audioRef.current.currentTime = sliderRef.current.value;
@@ -99,8 +101,14 @@ const PlayBar = ({ color, url }) => {
         mx-10
         '
       >
+        {/* control buttons */}
         <div className='flex justify-around'>
-          <button className='h-5 w-5'>
+          <button
+            className='h-5 w-5'
+            onClick={() => {
+              sliderRef.current.value = sliderRef.current.max;
+            }}
+          >
             <StopIcon className='h-full w-full' fill='#3D3D3D' stroke='none' />
           </button>
           <button
@@ -116,7 +124,9 @@ const PlayBar = ({ color, url }) => {
             )}
           </button>
         </div>
-        <div className='flex justify-center items-center pl-2'>
+
+        {/* slider */}
+        <div className='flex justify-center items-center overflow-hidden'>
           <div
             className='
             grid grid-cols-1 grid-rows-1
@@ -133,6 +143,7 @@ const PlayBar = ({ color, url }) => {
               onChange={handleProgressChange}
               type='range'
             />
+            {/* slider progress */}
             <div
               ref={sliderProgressRef}
               className={`
@@ -144,9 +155,11 @@ const PlayBar = ({ color, url }) => {
               rounded-full
               `}
             ></div>
+            {/* slider buffer */}
             <div
               ref={bufferRef}
               className='
+              overflow-hidden
               row-start-1 col-start-1
               z-10
               h-[1px]
@@ -155,17 +168,20 @@ const PlayBar = ({ color, url }) => {
               rounded-full
               '
             ></div>
+            {/* slider rail */}
             <div
               className='
               row-start-1 col-start-1
               z-0
-              w-full h-[1px]
+              h-[1px]
               bg-[#C6C6C6]
               rounded-full
               '
             ></div>
           </div>
         </div>
+
+        {/* current time */}
         <div>
           <p
             className='
@@ -175,13 +191,15 @@ const PlayBar = ({ color, url }) => {
             {formatTime(timeProgress)}
           </p>
         </div>
+
+        {/* volume */}
         <div
           className='
           flex gap-2
           '
         >
           <button>
-            <VolumeIcon color='red' />
+            <VolumeIcon color={color} />
           </button>
           <div className='w-[70%] flex justify-center items-center'>
             <div

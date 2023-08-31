@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PlayBar from "./PlayBar";
 import SimpleDisplay from "./SimpleDisplay";
 import TimedDisplay from "./TimedDisplay";
@@ -11,33 +11,39 @@ import {
   TextIcon,
   TimeIcon,
 } from "../assets/Icons";
-const colors= {
+const colors = {
   blue: "#118AD3",
   green: "#00BA9F",
-  red: "#FF1654"
-}
+  red: "#FF1654",
+};
 const ResultBox = ({ restart, color, archive = false, data }) => {
   const [displayType, setDisplayType] = useState("simple");
+  const copyAction = () => {
+    var text = "";
+    data[0].segments.forEach((element) => {
+      text += element.text + " ";
+    });
+    navigator.clipboard.writeText(text);
+  };
   if (data) {
     return (
       <div
         className='
-      h-full w-full
-      grid grid-cols-1 grid-rows-[68fr_285fr_76fr] px-7
+        h-full w-full
+        grid grid-cols-1 grid-rows-[68fr_285fr_76fr] px-7
         '
       >
         <div
           className='
-        h-full
-        flex justify-between items-center 
-        border-b border-[rgba(0,0,0,0.25)]
+          h-full
+          flex justify-between items-center 
+          border-b border-[rgba(0,0,0,0.25)]
           '
         >
           <div
             className='
             h-full
             flex gap-5 items-center
-            
             '
           >
             <button
@@ -45,10 +51,10 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
                 restart("initial");
               }}
               className={`
-            flex justify-center items-center gap-2 px-3 py-2
-            bg-${color} rounded-[20px]
-            ${archive ? "hidden" : ""}
-            `}
+              flex justify-center items-center gap-2 px-3 py-2
+              bg-${color} rounded-[20px]
+              ${archive ? "hidden" : ""}
+              `}
             >
               <p className='text-white text-sm'>شروع دوباره</p>
               <RefreshIcon />
@@ -59,6 +65,7 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             h-6 w-6 
             flex justify-center items-center
             `}
+              onClick={copyAction}
             >
               <CopyIcon className='fill-[#8F8F8F]' />
             </button>
@@ -124,7 +131,7 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             </button>
           </div>
         </div>
-        <div className='py-8 [direction:rtl] font-light h-[30vh] overflow-y-scroll'>
+        <div className='py-8 [direction:rtl] font-light h-[30vh] overflow-y-auto'>
           {displayType == "simple" ? (
             <SimpleDisplay data={data[0].segments} />
           ) : (
@@ -132,20 +139,23 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
           )}
         </div>
         <div className='flex justify-center items-center '>
-          <PlayBar color={color} url={data[0].media_url} />
+          <PlayBar
+            color={color}
+            url={data[0].media_url}
+            duration={data[0].duration}
+          />
         </div>
       </div>
     );
   } else {
-    
     return (
       <div
         className='
-      h-full w-full
-      flex justify-center items-center
-      '
+        h-full w-full
+        flex justify-center items-center
+        '
       >
-        <ReactLoading type={"spin"} color={colors['color']} />
+        <ReactLoading type={"spin"} color={colors["color"]} />
       </div>
     );
   }

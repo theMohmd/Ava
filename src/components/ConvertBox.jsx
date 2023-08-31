@@ -6,19 +6,7 @@ import LinkBox from "./LinkBox";
 import { ChainIcon, MicIcon, UploadIcon } from "../assets/Icons";
 
 const ConvertBox = ({ className, lang }) => {
-  const [comp, setComp] = useState(1);
-  const componentSelect = (comp) => {
-    switch (comp) {
-      case 1:
-        return <RecordBox lang={lang}/>;
-
-      case 2:
-        return <UploadBox lang={lang}/>;
-
-      default:
-        return <LinkBox lang={lang}/>;
-    }
-  };
+  const [comp, setComp] = useState("record"); //record, upload, link
   return (
     <div
       className={`${className} 
@@ -26,54 +14,60 @@ const ConvertBox = ({ className, lang }) => {
       `}
     >
       <div
-        className="
+        className='
         flex flex-row-reverse gap-2
-        "
+        '
       >
         <ConvertBoxButton
-          className={comp == 1 ? "bg-green" : ""}
+          className={comp == "record" ? "bg-green" : ""}
           onClick={() => {
-            setComp(1);
+            setComp("record");
           }}
-          color="green"
-          active={comp == 1}
+          color='green'
+          active={comp == "record"}
           Icon={MicIcon}
-          text="ضبط صدا"
+          text='ضبط صدا'
         />
         <ConvertBoxButton
-          className={comp == 2 ? "bg-blue" : ""}
+          className={comp == "upload" ? "bg-blue" : ""}
           onClick={() => {
-            setComp(2);
+            setComp("upload");
           }}
-          active={comp == 2}
-          color="blue"
+          active={comp == "upload"}
+          color='blue'
           Icon={UploadIcon}
-          text="بارگذاری فایل"
+          text='بارگذاری فایل'
         />
         <ConvertBoxButton
-          className={comp == 3 ? "bg-red" : ""}
+          className={comp == "link" ? "bg-red" : ""}
           onClick={() => {
-            setComp(3);
+            setComp("link");
           }}
-          active={comp == 3}
-          color="red"
+          active={comp == "link"}
+          color='red'
           Icon={ChainIcon}
-          text="لینک"
+          text='لینک'
         />
       </div>
       <div
         className={`
         border 
         ${
-          comp == 1
+          comp == "record"
             ? "rounded-[25px_0_25px_25px] border-green"
             : "rounded-[25px_25px_25px_25px]"
         } 
-        ${comp == 2 ? "border-blue" : ""}
-        ${comp == 3 ? "border-red" : ""}
+        ${comp == "upload" ? "border-blue" : ""}
+        ${comp == "link" ? "border-red" : ""}
         `}
       >
-        {componentSelect(comp)}
+        {comp === "record" ? (
+          <RecordBox lang={lang} />
+        ) : comp === "upload" ? (
+          <UploadBox lang={lang} />
+        ) : (
+          <LinkBox lang={lang} />
+        )}
       </div>
     </div>
   );

@@ -21,34 +21,36 @@ const LangSelect = ({ className, lang, setLang }) => {
           onClick={() => {
             setOpen(!open);
           }}
-          className="
+          className='
             h-10 w-full 
             flex justify-center items-center gap-2
-            "
+            '
         >
-          <DropIcon className={open ? "rotate-180" : ""}/>
-          <p className="relative bottom-[2px]">
+          <DropIcon className={open ? "rotate-180" : ""} />
+          <p className='relative bottom-[2px]'>
             {lang == "fa" ? "فارسی" : "انگلیسی"}
           </p>
         </button>
         <div className={open ? "" : "hidden"}>
           <button
             onClick={() => {
-              lang == "fa" ? setLang("en") : setLang("fa")
+              lang == "fa" ? setLang("en") : setLang("fa");
               setOpen(!open);
             }}
-            className="
+            className='
             h-10 w-full 
             flex justify-center items-center gap-2
             border-t border-[#00BA9F]
-            "
+            '
           >
             {lang != "fa" ? "فارسی" : "انگلیسی"}
           </button>
         </div>
       </div>
 
-      <p className="[direction:rtl] text-sm self-start leading-10 text-[#626262] font-light">زبان گفتار:</p>
+      <p className='[direction:rtl] text-sm self-start leading-10 text-[#626262] font-light'>
+        زبان گفتار:
+      </p>
     </div>
   );
 };

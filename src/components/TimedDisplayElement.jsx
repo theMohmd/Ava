@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-const TimedDisplayElement = ({text, startT, endT}) => {
+const TimedDisplayElement = ({ text, startT, endT }) => {
   return (
     <div
       className={`
@@ -16,7 +16,7 @@ const TimedDisplayElement = ({text, startT, endT}) => {
       <p className='font-iranSans'>{endT}</p>
       <p className='mr-2'>{text}</p>
     </div>
-  )
-}
+  );
+};
 
-export default TimedDisplayElement
+export default TimedDisplayElement;

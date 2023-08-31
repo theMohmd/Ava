@@ -2,8 +2,6 @@ import React from "react";
 import TimedDisplayElement from "./TimedDisplayElement";
 
 const TimedDisplay = ({ data }) => {
- 
-
   return (
     <div
       className={`
