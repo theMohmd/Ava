@@ -1,13 +1,17 @@
 import React from "react";
 import SideBarButton from "./SideBarButton";
 import { ArchiveIcon, LogoIcon, SpeechIcon } from "../assets/Icons";
+import { motion } from "framer-motion";
 
 const SideBar = () => {
   return (
-    <div
+    <motion.div
       className='
-      side-gradient rounded-[10px_0_0_10px]
+      side-gradient rounded-[10px_0_0_10px] duration-200
       '
+      initial={{ transform: "translate(100%, 0)"}}
+      animate={{ transform: "translate(0, 0)"}}
+      exit={{ transform: "translate(100%, 0)"}}
     >
       <div
         className='
@@ -28,7 +32,7 @@ const SideBar = () => {
           <SideBarButton to='/Ava/archive' text='آرشیو' src={<ArchiveIcon />} />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

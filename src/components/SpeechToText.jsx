@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-
 import ConvertBox from "./ConvertBox";
 import LangSelect from "./LangSelect";
+import { motion } from "framer-motion";
+
 
 const SpeechToText = () => {
   const [lang, setLang] = useState("fa");
   return (
-    <div
+    <motion.div
       className='
-        h-full w-full
-        grid grid-cols-[33fr_65fr_28fr] grid-rows-[24fr_48fr_21fr]
-        '
+      h-full w-full
+      grid grid-cols-[33fr_65fr_28fr] grid-rows-[24fr_48fr_21fr]
+      '
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      exit={{opacity: 0}}
     >
       <ConvertBox lang={lang} className='col-start-2 row-start-2' />
 
@@ -41,10 +45,10 @@ const SpeechToText = () => {
         </p>
       </div>
 
-      <div className='col-start-2 row-start-3 py-4'>
+      <div className='col-start-2 row-start-3 py-4 h-full'>
         <LangSelect lang={lang} setLang={setLang} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

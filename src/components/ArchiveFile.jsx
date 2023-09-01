@@ -11,13 +11,16 @@ import {
   UploadIcon,
 } from "../assets/Icons";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const ArchiveFile = ({ name, date, refresh, duration, id }) => {
   const [deleted, setDeleted] = useState(false);
   const [data, setData] = useState(null);
   const [type, setType] = useState(); // Url, upload, record
-  const once = useRef();
   const [extension, setExtension] = useState();
+  const [expanded, setExpanded] = useState(false);
+
+  const once = useRef();
 
   const copyAction = async () => {
     if (!data) {
@@ -48,16 +51,10 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
     var tempArr = temp.split(".");
     return tempArr.pop();
   };
-  useEffect(() => {
-    if (typeof name === "string") {
-      setExtension(findType(name));
-      setType("upload");
-    } else {
-      setType("Url");
-      setExtension("link");
-    }
-  }, [once]);
-
+  const expandAction = () => {
+    setExpanded(!expanded);
+    fetchData();
+  };
   const fetchData = async () => {
     if (!data) {
       axios
@@ -80,10 +77,25 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
       },
     });
   };
-  const [expanded, setExpanded] = useState(false);
-  if (deleted) return <></>;
+
+  useEffect(() => {
+    if (typeof name === "string") {
+      setExtension(findType(name));
+
+      if (findType(name) === "ogg") {
+        setType("record");
+      } else {
+        setType("upload");
+      }
+    } else {
+      setType("Url");
+      setExtension("link");
+    }
+  }, [once]);
+
+  if (deleted) return null;
   return (
-    <div
+    <motion.div
       className={`
       grid grid-cols-[128px_1fr] grid-rows-${expanded ? "[1fr_6fr]" : "1"}
       text-center justify-center items-center
@@ -100,9 +112,12 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
           ? "red"
           : "border-white"
       }
-      
       `}
+      initial={{ transform: "translate(30px, 0)", opacity: 0 }}
+      animate={{ transform: "translate(0, 0)", opacity: 1 }}
+      exit={{ transform: "translate(30px, 0)", opacity: 0 }}
     >
+      {/* control buttons */}
       <div className='grid grid-cols-4 justify-center items-center '>
         <button
           className='
@@ -110,7 +125,9 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
           flex justify-center items-center
           hover:bg-[#DC3545] rounded-full 
           '
-          onClick={deleteReq}
+          onClick={() => {
+            deleteReq();
+          }}
         >
           <DeleteIcon className='p-2 h-full w-full hover:stroke-white' />
         </button>
@@ -119,7 +136,9 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
           h-8 aspect-square
           flex justify-center items-center group
           '
-          onClick={copyAction}
+          onClick={() => {
+            copyAction();
+          }}
         >
           <CopyIcon className='h-full w-full p-2 fill-[#8F8F8F] hover:fill-green' />
         </button>
@@ -128,6 +147,9 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
           h-8 aspect-square
           flex justify-center items-center group
           '
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
         >
           <WordIcon className='h-full w-full p-[7px] fill-[#8F8F8F] hover:fill-green' />
         </button>
@@ -137,15 +159,23 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
           flex justify-center items-center group
           '
           title='۳.۲ مگابایت'
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
         >
           <DownloadIcon className='h-full w-full p-2 fill-[#8F8F8F] hover:fill-green' />
         </button>
       </div>
+
+      {/* info box */}
       <div
         className='
         grid grid-cols-[80fr_150fr_95fr_490fr_65fr] gap-2
         text-center justify-center items-center
         '
+        onClick={() => {
+          expandAction();
+        }}
       >
         <p className='text-xs font-iranSans'>{duration}</p>
         <p className='text-xs'>{extension}</p>
@@ -153,21 +183,21 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
 
         {type === "Url" ? (
           <a
-            className='px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis text-blue'
+            className='text-right px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis text-blue'
             href={name}
+            target='_blank'
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
           >
             {name}
           </a>
         ) : (
-          <p className='px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis'>
+          <p className='text-right px-2 overflow-hidden max-w-[100%] whitespace-nowrap text-ellipsis'>
             {name}
           </p>
         )}
         <button
-          onClick={() => {
-            setExpanded(!expanded);
-            fetchData();
-          }}
           className={`
           flex justify-center items-center
           h-8 aspect-square rounded-full justify-self-end
@@ -191,6 +221,8 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
           ) : null}
         </button>
       </div>
+
+      {/* result box */}
       {expanded && (
         <div
           className={`
@@ -230,7 +262,7 @@ const ArchiveFile = ({ name, date, refresh, duration, id }) => {
           )}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

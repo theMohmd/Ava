@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PlayBar from "./PlayBar";
 import SimpleDisplay from "./SimpleDisplay";
 import TimedDisplay from "./TimedDisplay";
-
 import ReactLoading from "react-loading";
 import {
   CopyIcon,
@@ -11,6 +10,7 @@ import {
   TextIcon,
   TimeIcon,
 } from "../assets/Icons";
+import { motion } from "framer-motion";
 const colors = {
   blue: "#118AD3",
   green: "#00BA9F",
@@ -27,11 +27,14 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
   };
   if (data) {
     return (
-      <div
+      <motion.div
         className='
         h-full w-full
         grid grid-cols-1 grid-rows-[68fr_285fr_76fr] px-7
         '
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
         <div
           className='
@@ -145,18 +148,21 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             duration={data[0].duration}
           />
         </div>
-      </div>
+      </motion.div>
     );
   } else {
     return (
-      <div
+      <motion.div
         className='
         h-full w-full
         flex justify-center items-center
         '
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
         <ReactLoading type={"spin"} color={colors["color"]} />
-      </div>
+      </motion.div>
     );
   }
 };

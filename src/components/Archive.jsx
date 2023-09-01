@@ -4,6 +4,7 @@ import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import ReactLoading from "react-loading";
+import { motion } from "framer-motion";
 const theme = createTheme({
   palette: {
     blue: { main: "#118AD3" },
@@ -39,8 +40,6 @@ const Archive = () => {
         loadData();
       }
     }
-
-    return () => {};
   }, [refresh]);
 
   useEffect(() => {
@@ -48,11 +47,14 @@ const Archive = () => {
   }, [page]);
   if (data) {
     return (
-      <div
+      <motion.div
         className='
         pr-40 pl-32 pt-24 py-20
         grid grid-cols-1 grid-rows-[1fr_10fr]
         '
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
         <h1 className='[direction:rtl] text-2xl text-green '>آرشیو من</h1>
         <div
@@ -79,7 +81,7 @@ const Archive = () => {
             ref={container}
             className='pl-2 gap-3 flex flex-col overflow-y-auto h-[65vh] [direction:rtl] [&>*]:[direction:ltr]'
           >
-            {data.results.map((item) => (
+            {data.results.map((item,index) => (
               <ArchiveFile
                 key={item.id}
                 id={item.id}
@@ -110,23 +112,29 @@ const Archive = () => {
                   "& .Mui-selected": {
                     color: "white",
                   },
+                  "& .Mui-selected:hover": {
+                    color: "#000000DE",
+                  },
                 }}
               />
             </ThemeProvider>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   } else {
     return (
-      <div
+      <motion.div
         className='
         h-full w-full 
         flex items-center justify-center 
         '
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
         <ReactLoading type={"spin"} color={"#00BA9F"} />
-      </div>
+      </motion.div>
     );
   }
 };

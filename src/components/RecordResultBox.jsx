@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import SimpleDisplay from "./SimpleDisplay";
 import TimedDisplay from "./TimedDisplay";
@@ -42,8 +42,8 @@ const RecordResultBox = ({ restart, color, data, stop, state }) => {
               <button
                 className={`
                 flex justify-center items-center gap-2 
-                bg-${color} rounded-[20px]
-                aspect-square h-8 relative p-1 flex justify-center items-center 
+                bg-red rounded-[20px]
+                aspect-square h-8 relative p-1 
                 `}
                 onClick={stop}
                 disabled={state !== "recording"}

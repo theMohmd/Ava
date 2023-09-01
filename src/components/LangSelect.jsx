@@ -5,16 +5,19 @@ const LangSelect = ({ className, lang, setLang }) => {
   return (
     <div
       className={`${className}
-      h-auto
       flex justify-start items-center gap-3
       text-sm
+      transition-all
+      
       `}
     >
       <div
         className={`${className}
           border border-[#00BA9F] rounded-[20px]
-          h-auto w-[105px] px-4 
+          w-[105px] px-4 
           text-[#00BA9F]
+          transition-all
+          ${open ? "h-20" : "h-10"}
           `}
       >
         <button
@@ -31,7 +34,7 @@ const LangSelect = ({ className, lang, setLang }) => {
             {lang == "fa" ? "فارسی" : "انگلیسی"}
           </p>
         </button>
-        <div className={open ? "" : "hidden"}>
+        <div className={open ? " delay-100" : "[visibility:hidden] "}>
           <button
             onClick={() => {
               lang == "fa" ? setLang("en") : setLang("fa");

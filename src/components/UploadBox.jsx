@@ -3,6 +3,8 @@ import ResultBox from "./ResultBox";
 import { SendIcon, UploadIcon } from "../assets/Icons";
 import axios from "axios";
 import ReactLoading from "react-loading";
+import { motion } from "framer-motion";
+
 const UploadBox = ({ lang }) => {
   const [state, setState] = useState("initial");
   const [fileName, setFileName] = useState(null);
@@ -37,23 +39,29 @@ const UploadBox = ({ lang }) => {
     return <ResultBox restart={setState} color='blue' data={data} />;
   } else if (state === "waiting") {
     return (
-      <div
+      <motion.div
         className='
         h-full w-full
         flex justify-center items-center
         '
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
         <ReactLoading type={"spin"} color={"#118AD3"} />
-      </div>
+      </motion.div>
     );
   } else if (state === "initial" || state === "fileSelected") {
     return (
-      <div
+      <motion.div
         className='
         h-full w-full px-20
         flex flex-col justify-center items-center
       
-      '
+        '
+        initial={{ opacity: 0,transform: "translate(0, 30px)" }}
+        animate={{ opacity: 1,transform: "translate(0, 0)" }}
+        exit={{ opacity: 0 }}
       >
         <button
           className='
@@ -115,7 +123,7 @@ const UploadBox = ({ lang }) => {
             </p>
           </div>
         )}
-      </div>
+      </motion.div>
     );
   }
 };

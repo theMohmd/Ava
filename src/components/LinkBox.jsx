@@ -3,6 +3,7 @@ import { ChainIcon } from "../assets/Icons";
 import axios from "axios";
 import ResultBox from "./ResultBox";
 import ReactLoading from "react-loading";
+import { motion } from "framer-motion";
 
 const LinkBox = ({ lang }) => {
   const [data, setData] = useState(null);
@@ -23,6 +24,7 @@ const LinkBox = ({ lang }) => {
         )
         .then(function (response) {
           setData(response.data);
+          setState("result");
         })
         .catch(function (error) {
           setState("initial");
@@ -32,11 +34,14 @@ const LinkBox = ({ lang }) => {
   };
   if (state === "initial") {
     return (
-      <div
+      <motion.div
         className='
         h-full w-full px-20
         flex flex-col justify-center items-center
         '
+        initial={{ opacity: 0 ,transform: "translate(0, 30px)"}}
+        animate={{ opacity: 1 ,transform: "translate(0, 0)"}}
+        exit={{ opacity: 0 }}
       >
         <div
           className='
@@ -64,18 +69,21 @@ const LinkBox = ({ lang }) => {
             <br />و دکمه را فشار دهید
           </p>
         </div>
-      </div>
+      </motion.div>
     );
   } else if (state === "waiting") {
     return (
-      <div
+      <motion.div
         className='
         h-full w-full
         flex justify-center items-center
         '
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
         <ReactLoading type={"spin"} color={"#FF1654"} />
-      </div>
+      </motion.div>
     );
   } else if (state === "result") {
     return <ResultBox restart={setState} color='red' data={data} />;
