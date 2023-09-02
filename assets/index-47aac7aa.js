@@ -86,7 +86,7 @@ Error generating stack: `+o.message+`
         grid grid-rows-[1fr_3fr_3fr] grid-cols-1 justify-center items-center px-2
         `,children:[y.jsxs(oe.div,{className:`h-10 w-full
           flex items-center justify-center gap-3 text-white
-          `,initial:{x:"50",opacity:0},animate:{x:0,opacity:1},transition:{delay:.1},children:[y.jsx("p",{className:"text-xl font-[700]",children:"آوا"}),y.jsx(I9,{})]}),y.jsxs("div",{className:"flex flex-col items-center justify-center gap-4",children:[y.jsx(s0,{delay:"0.1",to:"/Ava/",text:"تبدیل گفتار",src:y.jsx(U9,{})}),y.jsx(s0,{delay:"0.2",to:"/Ava/archive",text:"آرشیو",src:y.jsx(F9,{})})]})]})}),cu=({className:e,Icon:t,text:n,onClick:r,active:i})=>y.jsxs(oe.button,{whileHover:{scale:1.05},onClick:r,className:`${e} 
+          `,initial:{x:"50",opacity:0},animate:{x:0,opacity:1},transition:{delay:.1},children:[y.jsx("p",{className:"text-xl font-[700]",children:"آوا"}),y.jsx(I9,{})]}),y.jsxs("div",{className:"flex flex-col items-center justify-center gap-4",children:[y.jsx(s0,{delay:"0.1",to:"/Ava/",text:"تبدیل گفتار",src:y.jsx(U9,{})}),y.jsx(s0,{delay:"0.2",to:"/Ava/archive",text:"آرشیو",src:y.jsx(F9,{})})]})]})}),cu=({className:e,Icon:t,text:n,onClick:r,active:i})=>y.jsxs(oe.button,{whileHover:{scale:1.05,originX:"100%",originY:"100%"},onClick:r,className:`${e} 
       
       flex justify-center items-center
       h-full gap-2 rounded-[10px_10px_0_0]
