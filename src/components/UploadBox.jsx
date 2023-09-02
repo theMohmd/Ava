@@ -59,11 +59,11 @@ const UploadBox = ({ lang }) => {
         flex flex-col justify-center items-center
       
         '
-        initial={{ opacity: 0,transform: "translate(0, 30px)" }}
-        animate={{ opacity: 1,transform: "translate(0, 0)" }}
+        initial={{ opacity: 0, transform: "translate(0, 30px)" }}
+        animate={{ opacity: 1, transform: "translate(0, 0)" }}
         exit={{ opacity: 0 }}
       >
-        <button
+        <motion.button
           className='
           h-16 w-16 mb-2
           bg-blue 
@@ -72,6 +72,7 @@ const UploadBox = ({ lang }) => {
           overflow-hidden
           hover:opacity-90
           '
+          whileHover={{ scale: 1.05 }}
         >
           <input
             ref={inputRef}
@@ -88,23 +89,26 @@ const UploadBox = ({ lang }) => {
           />
 
           <UploadIcon className='h-full w-full p-3' />
-        </button>
+        </motion.button>
 
         {state === "fileSelected" ? (
           <div
             className='
             flex gap-3 justify-center items-center
+            border border-blue p-2 rounded-full
             '
           >
             <p
               className='
               font-iranYekan text-gray-800 
               max-w-[20ch] overflow-hidden
+              text-ellipsis  whitespace-nowrap
               '
             >
               {fileName}
             </p>
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
               className='
               h-8 w-8
               bg-blue rounded-full 
@@ -112,7 +116,7 @@ const UploadBox = ({ lang }) => {
               onClick={send}
             >
               <SendIcon className='h-full w-full p-[7px] stroke-white' />
-            </button>
+            </motion.button>
           </div>
         ) : (
           <div className=' max-h-[20vh] py-4'>

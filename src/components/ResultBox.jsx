@@ -36,6 +36,7 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
+        {/* top controls */}
         <div
           className='
           h-full
@@ -49,7 +50,8 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             flex gap-5 items-center
             '
           >
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
               onClick={() => {
                 restart("initial");
               }}
@@ -61,8 +63,9 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             >
               <p className='text-white text-sm'>شروع دوباره</p>
               <RefreshIcon />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
               className={`
             ${archive ? "hidden" : ""}
             h-6 w-6 
@@ -71,8 +74,9 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
               onClick={copyAction}
             >
               <CopyIcon className='fill-[#8F8F8F]' />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
               className={`
             ${archive ? "hidden" : ""}
             h-6 w-6 
@@ -80,7 +84,7 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             `}
             >
               <DownloadIcon className='fill-[#8F8F8F]' />
-            </button>
+            </motion.button>
           </div>
           <div
             className='
@@ -134,6 +138,8 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             </button>
           </div>
         </div>
+
+        {/* data display */}
         <div className='py-8 [direction:rtl] font-light h-[30vh] overflow-y-auto'>
           {displayType == "simple" ? (
             <SimpleDisplay data={data[0].segments} />
@@ -141,6 +147,8 @@ const ResultBox = ({ restart, color, archive = false, data }) => {
             <TimedDisplay data={data[0].segments} />
           )}
         </div>
+
+        {/* play bar */}
         <div className='flex justify-center items-center '>
           <PlayBar
             color={color}

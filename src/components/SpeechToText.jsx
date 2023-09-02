@@ -12,9 +12,8 @@ const SpeechToText = () => {
       h-full w-full
       grid grid-cols-[33fr_65fr_28fr] grid-rows-[24fr_48fr_21fr]
       '
-      initial={{opacity: 0}}
-      animate={{opacity: 1}}
-      exit={{opacity: 0}}
+      initial={{opacity: 0, y:-30}}
+      animate={{opacity: 1, y:0}}
     >
       <ConvertBox lang={lang} className='col-start-2 row-start-2' />
 

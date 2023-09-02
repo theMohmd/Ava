@@ -39,8 +39,8 @@ const LinkBox = ({ lang }) => {
         h-full w-full px-20
         flex flex-col justify-center items-center
         '
-        initial={{ opacity: 0 ,transform: "translate(0, 30px)"}}
-        animate={{ opacity: 1 ,transform: "translate(0, 0)"}}
+        initial={{ opacity: 0, transform: "translate(0, 30px)" }}
+        animate={{ opacity: 1, transform: "translate(0, 0)" }}
         exit={{ opacity: 0 }}
       >
         <div
@@ -50,12 +50,13 @@ const LinkBox = ({ lang }) => {
           flex justify-center items-center
           '
         >
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
             className='h-8 w-8 bg-red rounded-full hover:opacity-90'
             onClick={send}
           >
             <ChainIcon className='h-full w-full p-2' />
-          </button>
+          </motion.button>
           <input
             ref={inputRef}
             type='text'

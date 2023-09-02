@@ -1,8 +1,11 @@
+import { motion } from "framer-motion";
 import React from "react";
+
 
 const ConvertBoxButton = ({ className, Icon, text, onClick, active }) => {
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.05 }}
       onClick={onClick}
       className={`${className} 
       
@@ -17,7 +20,7 @@ const ConvertBoxButton = ({ className, Icon, text, onClick, active }) => {
     >
       <p>{text}</p>
       <Icon fill={!active ? "#969696" : "white"} />
-    </button>
+    </motion.button>
   );
 };
 

@@ -52,18 +52,26 @@ const Archive = () => {
         pr-40 pl-32 pt-24 py-20
         grid grid-cols-1 grid-rows-[1fr_10fr]
         '
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className='[direction:rtl] text-2xl text-green '>آرشیو من</h1>
+        <motion.h1
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className='[direction:rtl] text-2xl text-green '
+        >
+          آرشیو من
+        </motion.h1>
         <div
           className='
           w-full h-full
           grid grid-cols-1 grid-rows-[7fr_60fr_10fr]
           '
         >
-          <div
+          {/* labels */}
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
             className='
             pr-2 pl-4
             grid grid-cols-[128px_80fr_150fr_95fr_390fr_100fr_65fr] grid-rows-1
@@ -76,12 +84,13 @@ const Archive = () => {
               تاریخ بارگذاری
             </p>
             <p className='text-sm [direction:rtl] col-start-6 '>نام فایل</p>
-          </div>
+          </motion.div>
+          {/* data */}
           <div
             ref={container}
             className='pl-2 gap-3 flex flex-col overflow-y-auto h-[65vh] [direction:rtl] [&>*]:[direction:ltr]'
           >
-            {data.results.map((item,index) => (
+            {data.results.map((item, index) => (
               <ArchiveFile
                 key={item.id}
                 id={item.id}
@@ -89,16 +98,21 @@ const Archive = () => {
                 duration={item.duration}
                 date={item.date}
                 name={item.request_data.media_urls}
+                delay={index}
                 refresh={setRefresh}
               />
             ))}
           </div>
 
-          <div
+          {/* Pagination */}
+          <motion.div
             className={`
               flex justify-center items-center
               
             `}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
           >
             <ThemeProvider theme={theme}>
               <Pagination
@@ -118,7 +132,7 @@ const Archive = () => {
                 }}
               />
             </ThemeProvider>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     );

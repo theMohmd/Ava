@@ -9,9 +9,8 @@ const SideBar = () => {
       className='
       side-gradient rounded-[10px_0_0_10px] duration-200
       '
-      initial={{ transform: "translate(100%, 0)"}}
-      animate={{ transform: "translate(0, 0)"}}
-      exit={{ transform: "translate(100%, 0)"}}
+      initial={{ x: "100%" }}
+      animate={{ x: "0" }}
     >
       <div
         className='
@@ -19,17 +18,30 @@ const SideBar = () => {
         grid grid-rows-[1fr_3fr_3fr] grid-cols-1 justify-center items-center px-2
         '
       >
-        <div
+        <motion.div
           className='h-10 w-full
           flex items-center justify-center gap-3 text-white
           '
+          initial={{ x: "50", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.1 }}
         >
           <p className='text-xl font-[700]'>آوا</p>
           <LogoIcon />
-        </div>
+        </motion.div>
         <div className='flex flex-col items-center justify-center gap-4'>
-          <SideBarButton to='/Ava/' text='تبدیل گفتار' src={<SpeechIcon />} />
-          <SideBarButton to='/Ava/archive' text='آرشیو' src={<ArchiveIcon />} />
+          <SideBarButton
+            delay='0.1'
+            to='/Ava/'
+            text='تبدیل گفتار'
+            src={<SpeechIcon />}
+          />
+          <SideBarButton
+            delay='0.2'
+            to='/Ava/archive'
+            text='آرشیو'
+            src={<ArchiveIcon />}
+          />
         </div>
       </div>
     </motion.div>

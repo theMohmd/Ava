@@ -17,7 +17,7 @@ const RecordBox = () => {
   const mediaRecorder = useRef();
   const recording = useRef(false);
   const ws = useRef();
-  
+
   const getMicrophonePermission = async () => {
     if ("MediaRecorder" in window) {
       try {
@@ -39,12 +39,11 @@ const RecordBox = () => {
 
     mediaRecorder.current = new MediaRecorder(stream, { type: mimeType });
     mediaRecorder.current.start();
-    let localAudioChunks = [];
     mediaRecorder.current.addEventListener("dataavailable", (event) => {
       if (typeof event.data === "undefined") return;
       if (event.data.size === 0) return;
+      if (ws.current.readyState != 1) return;
       ws.current.send(event.data);
-      localAudioChunks.push(event.data);
     });
     if (recording.current) {
       setTimeout(() => {
@@ -83,7 +82,8 @@ const RecordBox = () => {
         }
       });
     }
-  }, [data, message]);
+    
+  }, [message]);
 
   useEffect(() => {
     if (recordingStatus === "initial") {
@@ -92,7 +92,6 @@ const RecordBox = () => {
         ws.current.close();
         setConnected(false);
       }
-      setData([]);
       ws.current = new WebSocket(WS_URL);
 
       ws.current.addEventListener("open", () => {
@@ -109,7 +108,7 @@ const RecordBox = () => {
   useEffect(() => {
     if (recordingStatus === "recording" && connected) {
       recordAndSend();
-    }
+    }else if (recordingStatus === "initial" && data.length !== 0 ) setData([]);
   }, [recordingStatus, connected]);
 
   if (recordingStatus === "initial") {
@@ -123,14 +122,15 @@ const RecordBox = () => {
         animate={{ opacity: 1, transform: "translate(0, 0)" }}
         exit={{ opacity: 0 }}
       >
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
           className={`bg-green mb-2 rounded-full relative h-16 w-16 hover:opacity-90 ${
             recordingStatus === "recording" ? "animate-bounce" : ""
           }`}
           onClick={startRecording}
         >
           <MicIcon className='h-full w-full p-3' />
-        </button>
+        </motion.button>
         <div className='max-h-[20vh] py-4'>
           <p className='[direction:rtl] max-w-[80ch] text-center text-[#626262] font-light'>
             برای شروع به صحبت، دکمه را فشار دهید

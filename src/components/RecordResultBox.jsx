@@ -12,10 +12,17 @@ import {
   TextIcon,
   TimeIcon,
 } from "../assets/Icons";
+import { motion } from "framer-motion";
 
 const RecordResultBox = ({ restart, color, data, stop, state }) => {
   const [displayType, setDisplayType] = useState("simple");
-
+  const copyAction = () => {
+    var text = "";
+    data.forEach((element) => {
+      text += element.text + " ";
+    });
+    navigator.clipboard.writeText(text);
+  };
   if (data) {
     return (
       <div
@@ -39,7 +46,8 @@ const RecordResultBox = ({ restart, color, data, stop, state }) => {
             '
           >
             {state === "recording" && (
-              <button
+              <motion.button
+              whileHover={{ scale: 1.05 }}
                 className={`
                 flex justify-center items-center gap-2 
                 bg-red rounded-[20px]
@@ -53,9 +61,10 @@ const RecordResultBox = ({ restart, color, data, stop, state }) => {
                 ) : null}
 
                 <StopIcon className='stroke-white fill-none' />
-              </button>
+              </motion.button>
             )}
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
               onClick={() => {
                 restart("initial");
               }}
@@ -67,23 +76,26 @@ const RecordResultBox = ({ restart, color, data, stop, state }) => {
             >
               <p className='text-white text-sm'>شروع دوباره</p>
               <RefreshIcon />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
               className={`
               h-6 w-6 
               flex justify-center items-center
               `}
+              onClick={copyAction}
             >
               <CopyIcon className='fill-[#8F8F8F]' />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
               className={`
               h-6 w-6 
               flex justify-center items-center
               `}
             >
               <DownloadIcon className='fill-[#8F8F8F]' />
-            </button>
+            </motion.button>
           </div>
           <div
             className='

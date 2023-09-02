@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { DropIcon, LogoutIcon, UserIcon } from "../assets/Icons";
+import { motion, spring } from "framer-motion";
 
 const DropDown = ({ className }) => {
   const [open, setOpen] = useState(false);
+  
   return (
-    <div
+    <motion.div
+    initial={{opacity:0, x:-30}}
+    animate={{opacity:1, x:0}}
       className={`${className}
       border border-[#00BA9F] rounded-[20px]
       w-32 px-4 
       text-[#00BA9F] text-[15px]
-      transition-all
+      transition-[height]
       ${open ? "h-20" : "h-10"}
       `}
     >
@@ -41,7 +45,7 @@ const DropDown = ({ className }) => {
           <LogoutIcon />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
