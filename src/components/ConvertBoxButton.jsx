@@ -5,7 +5,7 @@ import React from "react";
 const ConvertBoxButton = ({ className, Icon, text, onClick, active }) => {
   return (
     <motion.button
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.05 , originX: '100%', originY: '100%'}}
       onClick={onClick}
       className={`${className} 
       
